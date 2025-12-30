@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GroupFlix - Home Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ea2a33",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#181111", // Using the dark shade from the provided components
+                        "surface-dark": "#261c1c", // Lighter shade for cards
+                        "surface-hover": "#382929",
+                        "text-secondary": "#b89d9f",
+                    },
+                    fontFamily: {
+                        "display": ["Spline Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.375rem", // rounded-md roughly
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for webkit browsers */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #181111; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #382929; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4a3b3b; 
+        }
+    </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-white min-h-screen flex flex-col overflow-x-hidden selection:bg-primary selection:text-white">
+<!-- Top Navigation -->
+<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-[#382929] bg-[#181111]/90 backdrop-blur-md px-4 py-3 md:px-10">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-white cursor-pointer">
+<div class="size-8 text-primary">
+<svg fill="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"></path>
+</svg>
+</div>
+<h2 class="text-white text-xl font-bold leading-tight tracking-[-0.015em] hidden sm:block">GroupFlix</h2>
+</div>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-white text-sm font-medium leading-normal hover:text-primary transition-colors" href="home.html">Home</a>
+<a class="text-[#b89d9f] text-sm font-medium leading-normal hover:text-white transition-colors" href="groups.html">My Groups</a>
+<a class="text-[#b89d9f] text-sm font-medium leading-normal hover:text-white transition-colors" href="browse.html">Library</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<label class="hidden lg:flex flex-col min-w-40 h-10 w-64">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full bg-[#382929] group focus-within:ring-2 focus-within:ring-primary/50 transition-all">
+<div class="text-[#b89d9f] flex border-none items-center justify-center pl-4 rounded-l-lg border-r-0">
+<span class="material-symbols-outlined" style="font-size: 20px;">search</span>
+</div>
+<input class="flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 border-none bg-transparent focus:border-none h-full placeholder:text-[#b89d9f] px-3 rounded-l-none border-l-0 pl-2 text-sm font-normal leading-normal" placeholder="Search titles, genres..." value=""/>
+</div>
+</label>
+<div class="flex gap-2">
+<button class="hidden sm:flex h-10 items-center justify-center rounded-lg px-4 bg-primary hover:bg-red-600 transition-colors text-white text-sm font-bold leading-normal tracking-[0.015em] shadow-lg shadow-primary/20">
+<span class="truncate" onclick="location.href='create_party.html'" style="cursor:pointer"><span onclick="location.href='create_party.html'">Start a Party</span></span>
+</button>
+<button class="flex size-10 items-center justify-center rounded-lg bg-[#382929] hover:bg-[#4a3b3b] transition-colors text-white relative">
+<span class="material-symbols-outlined" style="font-size: 20px;">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-primary rounded-full border border-[#382929]"></span>
+</button>
+<button class="flex size-10 items-center justify-center rounded-lg bg-[#382929] hover:bg-[#4a3b3b] transition-colors text-white">
+<span class="material-symbols-outlined" style="font-size: 20px;">settings</span>
+</button>
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-10 border-2 border-[#382929] cursor-pointer" data-alt="User profile avatar showing a smiling person" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA8FWJsV06BmzKx2BZxEJypTtXRmFGVKRGVTuNlKyv1a5XgqMROF5HI-xI5v-M6XepQ29gRK2Wd-TANoy_0C8hS_NUWtB6R0WJRud2VLx9pXkq_e9b5CZ1dMiNvakDyhN7zajO2lzk8NNbZCzqZTDNC1jDYwymqKMe3cjhp7UztBu8WGcXBybNFnIz76rtylLCox0v8_flyLphxCW0WS1UgIQlLaFs6Ajciw-S-5u3nc3QA76ibfR5Aplt7CvNMWRplj79-ENT0fvk");'></div>
+</div>
+</div>
+</header>
+<div class="flex flex-1 relative max-w-[1600px] mx-auto w-full">
+<!-- Main Content Area -->
+<main class="flex-1 px-4 md:px-10 py-6 overflow-y-auto">
+<!-- Hero Section: Active Party -->
+<section class="mb-10 animate-fade-in">
+<div class="relative w-full rounded-2xl overflow-hidden shadow-2xl group">
+<!-- Background Image -->
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="Dark horror movie scene with a mysterious house" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDaihRI2icFYeHENUUX54Y8Cg9Z_1eT7kUtnbdDlrzY1HJEzGUV65yFpcYFzU6GpxMMZlWByBlhB9-ERkplVOqyK4ju-OA3dJBXeTvbfD1ehaSZgbTclq1ghnR32Mtn5W-waNir6bBtdMLYRPEPsGA9Iz0BGAyGOt0OXbRcdXy-AAvfSp0DiYjCPW_6h9cyqNmHrUrsphYM2x_wFVFOhR7odD22zsibZvzvM-M-iBrkcLIkM2vDQfDL2U0VzhBPDsKBWdax6roWW3M");'></div>
+<!-- Gradient Overlay -->
+<div class="absolute inset-0 bg-gradient-to-t from-[#181111] via-[#181111]/60 to-transparent"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-[#181111]/90 via-[#181111]/40 to-transparent"></div>
+<!-- Content -->
+<div class="relative z-10 p-6 md:p-10 flex flex-col justify-end min-h-[400px] md:min-h-[480px]">
+<div class="flex items-center gap-2 mb-4">
+<span class="flex h-2 w-2 rounded-full bg-primary animate-pulse"></span>
+<span class="text-primary font-bold tracking-widest uppercase text-xs">Live Now</span>
+</div>
+<h1 class="text-white text-3xl md:text-5xl font-black leading-tight tracking-[-0.033em] mb-2 max-w-2xl drop-shadow-lg">
+                            Friday Horror Night
+                        </h1>
+<div class="flex items-center flex-wrap gap-4 text-gray-300 text-sm md:text-base mb-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" style="font-size: 18px;">local_activity</span>
+<span>Hosted by <strong>Alex</strong></span>
+</div>
+<span class="hidden md:inline">•</span>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" style="font-size: 18px;">movie</span>
+<span>Watching: <strong>Hereditary</strong></span>
+</div>
+<span class="hidden md:inline">•</span>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-primary" style="font-size: 18px;">group</span>
+<span>12 Friends Watching</span>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row gap-3">
+<button class="flex h-12 items-center justify-center rounded-lg px-6 bg-primary hover:bg-red-600 text-white font-bold tracking-wide transition-all hover:scale-105 shadow-[0_0_20px_rgba(234,42,51,0.4)]">
+<span class="material-symbols-outlined mr-2" style="font-size: 20px;">play_circle</span>
+                                <span >Join Party</span>
+                            </button>
+<button class="flex h-12 items-center justify-center rounded-lg px-6 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-medium border border-white/10 transition-colors">
+                                <span onclick="location.href='details.html'">View Details</span>
+                            </button>
+</div>
+<!-- Active Users Avatars overlap -->
+<div class="absolute bottom-6 right-6 hidden md:flex items-center">
+<div class="flex -space-x-3">
+<div class="w-10 h-10 rounded-full border-2 border-[#181111] bg-gray-600 bg-cover bg-center" data-alt="User avatar 1" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCpDeR50vzDPqlus1sRFjnXU6DLQRZC5HPcp6obybmBiHVBITmc0EExJM3NukZ4UWkQaLoWr6e3VeCGltCbwmFx8tBo3pUG1RRjzhUZziMrEry91Y0KG6L5enoDLGbl2FAw9xckTi3NSoxpjbld4ndHNhsdL8B4gfcAf-vw-pVxJGefUaCzYVSlfvZGpJC9xkygpDhfvl-bOQgMFaf69nmtQXxelHjSZt3hEMOLwAe79kaOrT0SxoI6Fl8tom_Ptotaa4WpOsOJyV0");'></div>
+<div class="w-10 h-10 rounded-full border-2 border-[#181111] bg-gray-600 bg-cover bg-center" data-alt="User avatar 2" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDpvwuB7_EqDmWxk5nTYL4wEjT0bFPNoL3yRphHr4x6w6KQAW7fT2R2c43Z8s6sj7o9mSdd_ndz7mwoYV-gO0SCsicsMqPdKbnilePmOenlLnfFdhMkO-0DencsFbViCRpfqRBAclhviROIKg9ePfqs7p_ztnPqh-mZc0TtgHNAYSv13pSEN5R1oaj62fNA7cYqyEaHhb93eILU42z6a4K2J_yTuZOaN0UriaU0UPgOyiUXffqJKLaH568FoPmL7i3UtNC3zMxl2l0");'></div>
+<div class="w-10 h-10 rounded-full border-2 border-[#181111] bg-gray-600 bg-cover bg-center" data-alt="User avatar 3" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBXl1eOAUH9EAvYOvA0eWKI1Vo6Og7TwGPcbgQEKjZ_CBVQ19F2pj_HGg_gl04gGGpYdCZOVC3cGYCceNY_vq-PJbUc_h_082kEwRpDbYpmMrmRwD_diQFZdx7zeOjy-IbotLwho3hDf_k1LsjvbQ_5q_3Co5A6l9nZm17kuX1ErGqauFxO9AUmgbW0AbqW-vJ2ILWR99Q48PwrsteX7Z8knOaddKQ1cnPsuwnKCxa66lfSwgLj0mJSgVzlV42kZOOVmtdwvSEolvM");'></div>
+<div class="w-10 h-10 rounded-full border-2 border-[#181111] bg-[#382929] flex items-center justify-center text-xs font-bold text-white">
+                                    +9
+                                </div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Continue Watching -->
+<section class="mb-10">
+<div class="flex items-center justify-between mb-4 px-1">
+<h2 class="text-white text-xl font-bold">Continue Watching</h2>
+<div class="flex gap-2">
+<button class="bg-surface-hover hover:bg-white/20 rounded-full p-1 text-white transition">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="bg-surface-hover hover:bg-white/20 rounded-full p-1 text-white transition">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+<!-- Card 1 -->
+<div class="group relative bg-surface-dark rounded-lg overflow-hidden hover:ring-2 hover:ring-primary/50 transition-all duration-300">
+<div class="aspect-video bg-cover bg-center relative" data-alt="Stranger Things poster art" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDjIA2fXC_UbK6RVwC-zYLjY-aSFfbRsGyfsixauXq_Spgg3oxXhPVw-8cLvWd03ssgoitLs4d2t0Cbo9rYe6LLXJlXdxAX-9ehmAuEm-aJFDslS3HCYirvka1NZCx99Bi9NfRD0Po82p3rCywUMv51ZGyd17IY9Bzj8uDsrRX834-BCIouBaYlPPoI2UqxArWl6HaDP43VD1-6PquJGfkKEF4LPCxCN7dAR1amNpqVDmCchKVCfS6_PuHbgKK_XRrWXhhsAlm37mY");'>
+<div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100">
+<button class="bg-primary text-white rounded-full p-3 shadow-lg hover:scale-110 transition-transform">
+<span class="material-symbols-outlined fill-current">play_arrow</span>
+</button>
+</div>
+<!-- Progress Bar -->
+<div class="absolute bottom-0 left-0 w-full h-1 bg-gray-700">
+<div class="h-full bg-primary w-3/4"></div>
+</div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-1">
+<h3 class="text-white font-bold text-base truncate pr-2">Stranger Things</h3>
+<span class="text-xs text-[#b89d9f] bg-[#382929] px-1.5 py-0.5 rounded">S4:E2</span>
+</div>
+<p class="text-[#b89d9f] text-xs">45m remaining</p>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group relative bg-surface-dark rounded-lg overflow-hidden hover:ring-2 hover:ring-primary/50 transition-all duration-300">
+<div class="aspect-video bg-cover bg-center relative" data-alt="Inception movie still showing city bending" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCV0RmDfo5AZgoDsB3zuKNhRTWl6Fgi79xVNaEnArGwlpZuTp5ULRMNHB7A1HlfoLuU8PeL053FDl00384Z2bKEfbg4qe25Uqfigm_FE6MRiW__0o3qY-XECgsOhJHat2f9HiMIMgPSnVXXeVlvZKzlROLGomVqczrvjI82ocMu49wIaY7njDusS17I71cvKbQPKJQdeDLmiH6My5o_ed5HH_zqJpOXfLC9UI6PdAEW6VXT6ZwbiYOP2I7yKgxq8WJ87ns69KTJ92A");'>
+<div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100">
+<button class="bg-primary text-white rounded-full p-3 shadow-lg hover:scale-110 transition-transform">
+<span class="material-symbols-outlined fill-current">play_arrow</span>
+</button>
+</div>
+<!-- Progress Bar -->
+<div class="absolute bottom-0 left-0 w-full h-1 bg-gray-700">
+<div class="h-full bg-primary w-1/4"></div>
+</div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-1">
+<h3 class="text-white font-bold text-base truncate pr-2">Inception</h3>
+<span class="text-xs text-[#b89d9f] bg-[#382929] px-1.5 py-0.5 rounded">Movie</span>
+</div>
+<p class="text-[#b89d9f] text-xs">1h 20m remaining</p>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group relative bg-surface-dark rounded-lg overflow-hidden hover:ring-2 hover:ring-primary/50 transition-all duration-300 hidden lg:block">
+<div class="aspect-video bg-cover bg-center relative" data-alt="Cyberpunk city futuristic landscape" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBiwrF_jTeWz31-uvVdmNlAZwBgwShPL2b_4joyTcKcr6gCEGeu2_61WJgAq38KxjrWWVuAcZo_c2ENGuMpzs83To8Uqnn2metBMu4WhvmoQxZo2vQSFeCsI2zN_iO5PNR9sPOjeYlhxQl5xsNQHyujnlvLV6cIdWn6Vr0UnpBzzzS3TyOZnk1hUAB81W15yvUQIMD-8BwgLD-vDYXrNwlYVBdMgRSloSxC9orjEb0yK6iLOTUDoY-3x2zzTkzjcwSwcyGnNNt6Hro");'>
+<div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100">
+<button class="bg-primary text-white rounded-full p-3 shadow-lg hover:scale-110 transition-transform">
+<span class="material-symbols-outlined fill-current">play_arrow</span>
+</button>
+</div>
+<!-- Progress Bar -->
+<div class="absolute bottom-0 left-0 w-full h-1 bg-gray-700">
+<div class="h-full bg-primary w-[90%]"></div>
+</div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-1">
+<h3 class="text-white font-bold text-base truncate pr-2">Blade Runner 2049</h3>
+<span class="text-xs text-[#b89d9f] bg-[#382929] px-1.5 py-0.5 rounded">Movie</span>
+</div>
+<p class="text-[#b89d9f] text-xs">5m remaining</p>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="group relative bg-surface-dark rounded-lg overflow-hidden hover:ring-2 hover:ring-primary/50 transition-all duration-300 hidden xl:block">
+<div class="aspect-video bg-cover bg-center relative" data-alt="Forest landscape with foggy atmosphere" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDYp5y6BmSXIIPkoA9sdBh7uHidYPcbAS9kcR1p221V_hT8z1T1zNbgda3bJicia39RniEzTNSBSwxHLvbByiN4gnZiVTnbw-6kDcXY-VJ5rSpI2L78xqPG10G9qAxRsxljGD8HjjbEnBXIiAeRLjwH9eFasvdW7mxsuuMm_Jc7pgUDzoNe93uywnb27f_nABpheW2Os7F2M-Hs756nazkK-xLy-gMKwKb2x5uL5LfgGEvCaqDHNez7GDN2_BYmMb8rsFjaJu5-zLk");'>
+<div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100">
+<button class="bg-primary text-white rounded-full p-3 shadow-lg hover:scale-110 transition-transform">
+<span class="material-symbols-outlined fill-current">play_arrow</span>
+</button>
+</div>
+<!-- Progress Bar -->
+<div class="absolute bottom-0 left-0 w-full h-1 bg-gray-700">
+<div class="h-full bg-primary w-1/2"></div>
+</div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-1">
+<h3 class="text-white font-bold text-base truncate pr-2">Dark</h3>
+<span class="text-xs text-[#b89d9f] bg-[#382929] px-1.5 py-0.5 rounded">S2:E5</span>
+</div>
+<p class="text-[#b89d9f] text-xs">28m remaining</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Trending in Your Circle -->
+<section class="mb-10">
+<div class="flex items-center gap-3 mb-6 px-1">
+<span class="bg-primary/20 p-1.5 rounded-lg text-primary">
+<span class="material-symbols-outlined text-xl block">groups</span>
+</span>
+<h2 class="text-white text-xl font-bold">Trending in Your Circle</h2>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+<!-- Movie Poster 1 -->
+<div class="group relative rounded-lg overflow-hidden cursor-pointer transition-transform hover:-translate-y-1">
+<div class="aspect-[2/3] bg-cover bg-center" data-alt="Abstract space movie poster" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAPkkjtAJroXPKfDl3uYsNVo87A_oH-4RbM7oG_aDyLxYDBALCStWgY7ieD1ukZ0ypaF5Vy7AguRhM9iL151YtalAedUOFcCfo-BUicfLVOY1SKkBKB8mTBGsdPlPnTN2pAPF9W5ml4XlfPvM1Hq2p1tk5SbRlfeM5mSkrbU4mA-LdsymONHSdUvaFksAQOuTdhu2EpCIOAsTeHL9rdrm5XHpEms5JTLlfapACKM_qtJvUqYY8EShyXYFtQRRlXwbJHHOZ3LgjujMc");'></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-3">
+<h4 class="text-white font-bold text-sm mb-1">Interstellar</h4>
+<div class="flex items-center gap-1 text-xs text-gray-300 mb-2">
+<span class="text-yellow-400 material-symbols-outlined text-[14px]">star</span> 4.9
+                                <span>• 2014</span>
+</div>
+<div class="flex gap-1 mb-2">
+<div class="w-5 h-5 rounded-full border border-black bg-gray-500 bg-cover" data-alt="Small friend avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCjxeek5Ve6SvtST4zC6CIVcJOyf9p8XAnLc-SgCHvwZeUHIARK_32Emz5KagepF5b8UknJAxu9CW5MzmJcvRlgY36q3slMigrfcprw7_jFk3NUwRqwTfaz3tOjaDagN05YAMZXLBuFsmn0-Leorr4uwg4Y3bh1vx54Kd0XduTD-K8H6OLUvljga_GmqqdrxUAZhzaa7pf4QMfWr8E-0FIgY0aPheR-bzImZHSTuIwxNggSB5JFMUMC0b_RG2q4eXMhd1VuEHjrz7s");'></div>
+<div class="w-5 h-5 rounded-full border border-black bg-gray-500 bg-cover" data-alt="Small friend avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBGgiYgVHCsavQWxVfekbMepx9NJwsqQMl-FstRRiEr0OEHqxqm7Yaf34DJJ2laP61oHzRE2EVfixKkbeQmmsw2SRbLh4Yx0oM9T46elLYoCnCwW38_etsGco9TibYTkOxJkfKZvY-EGXwxQGBcgXyzpjl_x5fBaghuPu3RZWAWcmrcq4DKelY6UTC5lAMTxYTGKgJ-vwVEKes9jSPv4BZBkJIUH7H-MFvhkVNUIcfOLXKwWRXz_mG6ts2bQH-kho_OtaQHkHiL5Cs");'></div>
+<span class="text-[10px] text-gray-400 self-center ml-1">+3 friends</span>
+</div>
+<button class="w-full bg-primary hover:bg-red-600 text-white text-xs font-bold py-1.5 rounded flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[14px]">group_add</span> Party
+                            </button>
+</div>
+</div>
+<!-- Movie Poster 2 -->
+<div class="group relative rounded-lg overflow-hidden cursor-pointer transition-transform hover:-translate-y-1">
+<div class="aspect-[2/3] bg-cover bg-center" data-alt="Dramatic lighting movie poster" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBDaWJr6zYhMywvhe-jSTKry927yB0tBPLkbbDJxMrwTQqvyhhZXJn7bmnmCU1nNLwDWLQGmNXIf6EyFVRL7Utn2l3td1-9MhzO4mmXzT8Ke-oWhSfoqAcdNROhcRZulbz8lXon7B-G8ysDW3PBxRPK8l3zajixaMaHLKa3ueG9B1ks3hXYE-WhgtlgJFcL82xQNUN-kneF8445GI2mzY6jAQGs1bZAlo6THQ8FTn7ibb7mScYBq6AzQdIJiehfDWtGm6XdtRSeS3E");'></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-3">
+<h4 class="text-white font-bold text-sm mb-1">Stranger Things</h4>
+<div class="flex items-center gap-1 text-xs text-gray-300 mb-2">
+<span class="text-yellow-400 material-symbols-outlined text-[14px]">star</span> 4.8
+                                <span>• TV-14</span>
+</div>
+<div class="flex gap-1 mb-2">
+<div class="w-5 h-5 rounded-full border border-black bg-gray-500 bg-cover" data-alt="Small friend avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAVlnypgQYcCMIkDtb7YpcxjBLGif8AvZxhUA217DWch1e9XbAC5aeKwWcG-q_5jqNfboOD0eBp5jjBbHg88jzRcamGXZaf2zD_vwrQUKz2Q_wHaq7NSsFo_hBAE155-2Jto4rhJ3Xq0ed5xwF3DvT8VjnqQu2bkECqfzdj0ODkmaxQ4NHozGH8ocYYlmvzCsyrY4Kj0p7dQIUIFxZ4ZI8VOI4vg33JN4LRBZ1ZgqkEK02Y-Qj4me2mQQZg3iVZ9M66aMF0uTOYad8");'></div>
+<span class="text-[10px] text-gray-400 self-center ml-1">Sarah watched</span>
+</div>
+<button class="w-full bg-primary hover:bg-red-600 text-white text-xs font-bold py-1.5 rounded flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[14px]">group_add</span> Party
+                            </button>
+</div>
+</div>
+<!-- Movie Poster 3 -->
+<div class="group relative rounded-lg overflow-hidden cursor-pointer transition-transform hover:-translate-y-1">
+<div class="aspect-[2/3] bg-cover bg-center" data-alt="Retro vaporwave style poster" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCzS4P8AOjYlzNm-Q455UrDuTPZX5fCoj1--alyw4g5UAxszWTG_1R7A8S4PS8pQJe9DSFZo-hj2Tmdz9Bksn4viUDFJOlUAI1_OHWIOhQnEv9LVpVGweG6B4QUkILhUVpzZzwTe_Szs_eoMFw_UqwoBKAkgcXe9imSLV0Z4myfnF-4aPsmnKF799-i_535xhupGuYd9PinVL1sFvC34FFHUJl_wyg-illeduJ63nEentqtw9yzlP73o-8lCcUcxrpIok8poal5dXI");'></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-3">
+<h4 class="text-white font-bold text-sm mb-1">Drive</h4>
+<div class="flex items-center gap-1 text-xs text-gray-300 mb-2">
+<span class="text-yellow-400 material-symbols-outlined text-[14px]">star</span> 4.5
+                                <span>• 2011</span>
+</div>
+<div class="flex gap-1 mb-2">
+<span class="text-[10px] text-gray-400 self-center ml-1">Trending in 'Action Fans'</span>
+</div>
+<button class="w-full bg-primary hover:bg-red-600 text-white text-xs font-bold py-1.5 rounded flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[14px]">group_add</span> Party
+                            </button>
+</div>
+</div>
+<!-- Movie Poster 4 -->
+<div class="group relative rounded-lg overflow-hidden cursor-pointer transition-transform hover:-translate-y-1">
+<div class="aspect-[2/3] bg-cover bg-center" data-alt="Minimalist abstract poster" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBB2KOIWPXiFKdtmgQ-sosf94pgHWnedbjy7RmLhGK35iyQEtNyDhrbRHgAT8aQ0WBlnk_D2MpPfnT3wK0k9EBrzgPHEWe10VAXR2lY5WYbvo-VKz1V18ammpss4lkKKhZGld7OA6rWAIhZF6v90YjItgLDwJlDrwIbjdzvYgAO8vwzwR9k9Wecb2qYEu_AWiTmhp4Me5G-rUWYNnH6dBtLLAscbBQmXdMR_ZFnh7LMRayO3uvWfLpK2zO71WJWufYj8zYMFiUcLsc");'></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-3">
+<h4 class="text-white font-bold text-sm mb-1">Dune</h4>
+<div class="flex items-center gap-1 text-xs text-gray-300 mb-2">
+<span class="text-yellow-400 material-symbols-outlined text-[14px]">star</span> 4.7
+                                <span>• 2021</span>
+</div>
+<button class="w-full bg-primary hover:bg-red-600 text-white text-xs font-bold py-1.5 rounded flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[14px]">group_add</span> Party
+                            </button>
+</div>
+</div>
+<!-- Movie Poster 5 -->
+<div class="group relative rounded-lg overflow-hidden cursor-pointer transition-transform hover:-translate-y-1 hidden lg:block">
+<div class="aspect-[2/3] bg-cover bg-center" data-alt="Classic noir style poster" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDtADz3ke-vWUl1T5Bgud0onx38_HsTOSGwUvDMT83wKSFN82EodBmUwekkSG0voB7t6vEzD-7OPJG3-u8hmAsR6PnyuxEt8L2qiDmDu5BCxzEl7A0dbyhuQAt6q21sBC3XNUpNv7XV1sufpEZlI1JMdYq-LqgIHW7rGm8_v97QCWPEdMOrGgQk1NZdh3DSv851dnzbRD0Mwl1ep-8qG63cFASxa6n2nCqvOs4LUPZCfq1ZW_QEcozW4VoMtdY2z_8YoS_Sp4Xa5E4");'></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-3">
+<h4 class="text-white font-bold text-sm mb-1">The Batman</h4>
+<div class="flex items-center gap-1 text-xs text-gray-300 mb-2">
+<span class="text-yellow-400 material-symbols-outlined text-[14px]">star</span> 4.6
+                                <span>• 2022</span>
+</div>
+<button class="w-full bg-primary hover:bg-red-600 text-white text-xs font-bold py-1.5 rounded flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[14px]">group_add</span> Party
+                            </button>
+</div>
+</div>
+<!-- Movie Poster 6 -->
+<div class="group relative rounded-lg overflow-hidden cursor-pointer transition-transform hover:-translate-y-1 hidden xl:block">
+<div class="aspect-[2/3] bg-cover bg-center" data-alt="Color splash art poster" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDuoZrPALEgSrr5MYci9SAOmkgDPjXsIJkBo-DdbOxaDXgNdi9jJ83qyx9qmwsMDHYEUGDPhjxv691oa7O9x6N5unLKwqSD6Wp9Y5haG_v1jPBvKuObAzzBtuJ8P3zvwRopjGgKldjpB6nkYnil8RqAad0Ee-IqNPNHINHueU6swDxSl12qD5WDl9TzLgJFyiab7M-sv7Cfg97piOdSncGgPy3ihMjOXnXjrbGKHyv_HWmK6yxpqaKv_HivrTHIHSiQUlteVj_QJBQ");'></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-3">
+<h4 class="text-white font-bold text-sm mb-1">Spider-Verse</h4>
+<div class="flex items-center gap-1 text-xs text-gray-300 mb-2">
+<span class="text-yellow-400 material-symbols-outlined text-[14px]">star</span> 4.9
+                                <span>• 2018</span>
+</div>
+<button class="w-full bg-primary hover:bg-red-600 text-white text-xs font-bold py-1.5 rounded flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[14px]">group_add</span> Party
+                            </button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Right Sidebar: Friends Activity -->
+<aside class="hidden xl:flex w-72 flex-col border-l border-[#382929] bg-[#181111] p-4 sticky top-16 h-[calc(100vh-64px)] overflow-y-auto">
+<h3 class="text-[#b89d9f] text-sm font-bold uppercase tracking-wider mb-4 px-2">Online Friends</h3>
+<div class="flex flex-col gap-1">
+<!-- Friend Item 1: Watching -->
+<div class="flex items-center gap-3 p-2 rounded-lg hover:bg-[#261c1c] transition-colors cursor-pointer group">
+<div class="relative">
+<div class="w-10 h-10 rounded-full bg-cover bg-center" data-alt="Friend avatar Sarah" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBGONqqLTPGUr_5se5cO9rmeE-AGpBBBB6Fo7MyB67lp1U2SFbO9ole95lNECxkI0x0T9Wrh3mJmkCuEXpBODooQFE9JvL0HdldZLF94W6W0hffLESnAzGZ-w2nFo_nNKxu4W9pAJ44K8WYG2sb31ZDAOXp7pTRG-GgFzm02LTtZy93wHZ-luTbfUhNkyQrQmNgR2z6Qfv7rEV-b4-fKTwJRTDU1cPC9et1ILPEosZehobQYqSqmVZOTW_P3JaKUOGTLNECw6vaIpM");'></div>
+<span class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-[#181111] rounded-full"></span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="text-white text-sm font-medium truncate">Sarah Jenkins</span>
+<span class="text-primary text-xs truncate flex items-center gap-1">
+                            Watching <span class="font-bold">The Office</span>
+</span>
+</div>
+<button class="ml-auto text-gray-500 hover:text-white opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-[20px]">play_circle</span>
+</button>
+</div>
+<!-- Friend Item 2: Watching Group -->
+<div class="flex items-center gap-3 p-2 rounded-lg hover:bg-[#261c1c] transition-colors cursor-pointer group">
+<div class="relative">
+<div class="w-10 h-10 rounded-full bg-cover bg-center" data-alt="Friend avatar Mike" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAhuiXU9Zvc3rKCJsjoQnuN3S8fUCUImje4Acr0Ykyeq1ttAT_ZTmEiLhf-BPXFtaPZQJOCR3UFwzjNQdJx6vyr2iFB_rGDsWhLxNvH-stPiquwH5l62M83_Hb4oOzP51KLpGbhskIn0nkPcdC3WjaNm0Ug_vWdvmm5F2eW6glWZw3hEDPpzQylGmBJaKmoy3zMoUflQuRUFck3lIsyOYQprNjJZWPt4VUv2Igw_mZUmgh9pv_z7J5KJGxnv0hKBJQXUT_vUDgVfIE");'></div>
+<span class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-[#181111] rounded-full"></span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="text-white text-sm font-medium truncate">Mike Ross</span>
+<span class="text-[#b89d9f] text-xs truncate">In a Watch Party</span>
+</div>
+<button class="ml-auto text-gray-500 hover:text-white opacity-0 group-hover:opacity-100 transition-opacity" onclick="location.href='signup.html'"><span class="truncate">Login</span></button>
+</div>
+<!-- Friend Item 3: Idle -->
+<div class="flex items-center gap-3 p-2 rounded-lg hover:bg-[#261c1c] transition-colors cursor-pointer">
+<div class="relative">
+<div class="w-10 h-10 rounded-full bg-cover bg-center" data-alt="Friend avatar Jessica" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAGd0d_b06S36EIaUzx5C26QKqyoHQfhEpcABN5QceWqsq7VryW_mrRYUYsme7WdiTJmdRiSoPiSlyx3G0mzyEzUX2AgFTkyAUVs-HY50EvfFrifiEUY3yTHTnGSTjXysOpDqFl4I2wBWJieQd-43KjqM9EX3D3rzdaNsLs-lsDvsNxOpvyLfLSCRWynllT_t1V5ByvbaHgQNrxbUj_-BrvkvU4wSL5Q0hC0o15JW3cH0vTOlPYtr4pDx_lEvzLPrknPIRdFQBvZbU");'></div>
+<span class="absolute bottom-0 right-0 w-3 h-3 bg-yellow-500 border-2 border-[#181111] rounded-full"></span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="text-white text-sm font-medium truncate">Jessica Pearson</span>
+<span class="text-[#b89d9f] text-xs truncate">Idle</span>
+</div>
+</div>
+<!-- Friend Item 4: Offline -->
+<div class="flex items-center gap-3 p-2 rounded-lg hover:bg-[#261c1c] transition-colors cursor-pointer opacity-60">
+<div class="relative">
+<div class="w-10 h-10 rounded-full bg-cover bg-center grayscale" data-alt="Friend avatar Louis" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCtwpgiL7HzeCyRTS_xXQEmgskZCDdF7r21nG3L-qz6M8L_LvQxAVyZQQpIh7q3wwbXXx5E3JhHzy6_CR32fQ8N1kbflYEadbEV2fzLt5UaQaKvIKiuY9kLwcZTlbe6Ts8HIGgudSaGjYLjEu0xF9ZBj5odBdBgkmajHvmO68tNtfI6KnkPXBtQ1YwMVK5cEcwhz-C_eTVIwcID_eyauvT-jwdVLp_FsJqP4086nH87phazp-f8uzObHyVdA6gZWbIrjRjOE1mSlN8");'></div>
+<span class="absolute bottom-0 right-0 w-3 h-3 bg-gray-500 border-2 border-[#181111] rounded-full"></span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="text-white text-sm font-medium truncate">Louis Litt</span>
+<span class="text-[#b89d9f] text-xs truncate">Offline 2h ago</span>
+</div>
+</div>
+</div>
+<div class="mt-8">
+<h3 class="text-[#b89d9f] text-sm font-bold uppercase tracking-wider mb-4 px-2">Group Invites</h3>
+<div class="bg-surface-dark p-3 rounded-lg border border-[#382929] hover:border-primary/30 transition-colors">
+<div class="flex justify-between items-start mb-2">
+<span class="text-xs font-bold text-primary uppercase">Pending</span>
+<span class="text-[10px] text-gray-500">2m ago</span>
+</div>
+<p class="text-white text-sm font-medium mb-1">Anime Weekend</p>
+<p class="text-[#b89d9f] text-xs mb-3">Invited by <strong>Kenji</strong></p>
+<div class="flex gap-2">
+<button class="flex-1 bg-primary hover:bg-red-600 text-white text-xs font-bold py-1.5 rounded">Accept</button>
+<button class="flex-1 bg-[#382929] hover:bg-[#4a3b3b] text-white text-xs font-bold py-1.5 rounded">Decline</button>
+</div>
+</div>
+</div>
+</aside>
+</div>
+</body></html>
+
+
+
+

@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GroupWatch - User Profile</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ea2a33",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#211111",
+                        "surface-dark": "#382929",
+                        "surface-light": "#ffffff",
+                    },
+                    fontFamily: {
+                        "display": ["Spline Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Spline Sans', sans-serif;
+        }
+        /* Custom scrollbar for dark mode feels */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #211111; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #382929; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ea2a33; 
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display min-h-screen flex flex-col">
+<!-- Top Navigation -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-[#382929] px-10 py-3 bg-surface-light dark:bg-[#181111] sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-primary">
+<div class="size-8 text-primary">
+<svg class="size-8" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M39.5563 34.1455V13.8546C39.5563 15.708 36.8773 17.3437 32.7927 18.3189C30.2914 18.916 27.263 19.2655 24 19.2655C20.737 19.2655 17.7086 18.916 15.2073 18.3189C11.1227 17.3437 8.44365 15.708 8.44365 13.8546V34.1455C8.44365 35.9988 11.1227 37.6346 15.2073 38.6098C17.7086 39.2069 20.737 39.5564 24 39.5564C27.263 39.5564 30.2914 39.2069 32.7927 38.6098C36.8773 37.6346 39.5563 35.9988 39.5563 34.1455Z" fill="currentColor"></path>
+<path clip-rule="evenodd" d="M10.4485 13.8519C10.4749 13.9271 10.6203 14.246 11.379 14.7361C12.298 15.3298 13.7492 15.9145 15.6717 16.3735C18.0007 16.9296 20.8712 17.2655 24 17.2655C27.1288 17.2655 29.9993 16.9296 32.3283 16.3735C34.2508 15.9145 35.702 15.3298 36.621 14.7361C37.3796 14.246 37.5251 13.9271 37.5515 13.8519C37.5287 13.7876 37.4333 13.5973 37.0635 13.2931C36.5266 12.8516 35.6288 12.3647 34.343 11.9175C31.79 11.0295 28.1333 10.4437 24 10.4437C19.8667 10.4437 16.2099 11.0295 13.657 11.9175C12.3712 12.3647 11.4734 12.8516 10.9365 13.2931C10.5667 13.5973 10.4713 13.7876 10.4485 13.8519ZM37.5563 18.7877C36.3176 19.3925 34.8502 19.8839 33.2571 20.2642C30.5836 20.9025 27.3973 21.2655 24 21.2655C20.6027 21.2655 17.4164 20.9025 14.7429 20.2642C13.1498 19.8839 11.6824 19.3925 10.4436 18.7877V34.1275C10.4515 34.1545 10.5427 34.4867 11.379 35.027C12.298 35.6207 13.7492 36.2054 15.6717 36.6644C18.0007 37.2205 20.8712 37.5564 24 37.5564C27.1288 37.5564 29.9993 37.2205 32.3283 36.6644C34.2508 36.2054 35.702 35.6207 36.621 35.027C37.4573 34.4867 37.5485 34.1546 37.5563 34.1275V18.7877ZM41.5563 13.8546V34.1455C41.5563 36.1078 40.158 37.5042 38.7915 38.3869C37.3498 39.3182 35.4192 40.0389 33.2571 40.5551C30.5836 41.1934 27.3973 41.5564 24 41.5564C20.6027 41.5564 17.4164 41.1934 14.7429 40.5551C12.5808 40.0389 10.6502 39.3182 9.20848 38.3869C7.84205 37.5042 6.44365 36.1078 6.44365 34.1455L6.44365 13.8546C6.44365 12.2684 7.37223 11.0454 8.39581 10.2036C9.43325 9.3505 10.8137 8.67141 12.343 8.13948C15.4203 7.06909 19.5418 6.44366 24 6.44366C28.4582 6.44366 32.5797 7.06909 35.657 8.13948C37.1863 8.67141 38.5667 9.3505 39.6042 10.2036C40.6278 11.0454 41.5563 12.2684 41.5563 13.8546Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">GroupWatch</h2>
+</div>
+<nav class="flex items-center gap-9 hidden md:flex">
+<a class="text-slate-600 dark:text-slate-200 hover:text-primary transition-colors text-sm font-medium leading-normal" href="home.html">Home</a>
+<a class="text-primary font-bold text-sm leading-normal" href="profile.html">My Profile</a>
+<a class="text-slate-600 dark:text-slate-200 hover:text-primary transition-colors text-sm font-medium leading-normal" href="groups.html">Groups</a>
+<a class="text-slate-600 dark:text-slate-200 hover:text-primary transition-colors text-sm font-medium leading-normal" href="browse.html">Recommendations</a>
+</nav>
+</div>
+<div class="flex flex-1 justify-end gap-8 items-center">
+<label class="flex flex-col min-w-40 !h-10 max-w-64 hidden sm:block">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full group focus-within:ring-2 ring-primary/50 transition-all">
+<div class="text-[#b89d9f] flex border-none bg-slate-100 dark:bg-[#382929] items-center justify-center pl-4 rounded-l-lg border-r-0">
+<span class="material-symbols-outlined" style="font-size: 20px;">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-900 dark:text-white focus:outline-0 focus:ring-0 border-none bg-slate-100 dark:bg-[#382929] focus:border-none h-full placeholder:text-[#b89d9f] px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal" placeholder="Search movies, friends..." value=""/>
+</div>
+</label>
+<div class="flex items-center gap-4">
+<button class="bg-slate-100 dark:bg-[#382929] text-slate-900 dark:text-white rounded-full p-2 hover:bg-primary/20 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-transparent hover:border-primary cursor-pointer transition-all" data-alt="User avatar small" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCtuoDNKskmzD23RCXuAIs0_bnduNHNj8JVNgDX6JMw8MyqGXU43BeHauDN6SjeM5q40p99IWArNTDEc_6u3Vm3va3zIsro_JlbyxYZFHChOZBK9pfPCYYfUS61Mq7oK1roXoM8k3Jb5Hj1Q8zu8m0KRXeRWg6-CSZgR8fRgP_g0lW4spV7p5D0DHI6RRxGdZfvg9_gr9d2Co0Mdtj3zgXxTS0DKeGEHLzGWHQpjTluOhLs60nyGwtI6jOHfAAvXzt9IpvAsEI_TR0");'></div>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-grow w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<!-- Profile Header -->
+<section class="mb-8">
+<div class="flex flex-col md:flex-row gap-6 items-start md:items-center bg-white dark:bg-[#2C2020] rounded-xl p-6 shadow-sm border border-slate-200 dark:border-transparent">
+<div class="relative group">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-32 w-32 border-4 border-slate-100 dark:border-[#382929] shadow-lg" data-alt="Alex Streamer profile picture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCaWdvjFxqT8a27a9qdk0MXEmPKo1Um_fUlRIWAIaEJ_Z5WfJPd-a_8vM0KI_HKyzqBGl_5TWOevXEgzjtqtIX0tFmhSuU-Z4l29B-D-4G7OeYkpiL_zNiYx2vm20lWSoer6kZUPFofPhzO23-k8Eg3qOLoO5mMVvSWPd21xaRw_mASbasQnURBm7s9rqOAHqzxhUhFFn7X3giUyFVPhi45U-Hm4rb5GfLsdJHJi7plDg7PMS7-mRIx9pQoXljPkuneFgb-V54WGAA");'></div>
+<div class="absolute bottom-1 right-1 bg-green-500 w-5 h-5 rounded-full border-2 border-white dark:border-[#2C2020]" title="Online"></div>
+</div>
+<div class="flex-1 w-full">
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">
+<div>
+<h1 class="text-3xl font-bold text-slate-900 dark:text-white leading-tight">Alex Streamer</h1>
+<p class="text-slate-500 dark:text-[#b89d9f] text-base font-medium flex items-center gap-2 mt-1">
+<span class="material-symbols-outlined text-sm text-primary">verified</span>
+                                Ready to Watch â€¢ Binge Master
+                            </p>
+</div>
+<div class="flex gap-3 w-full sm:w-auto">
+<button class="flex-1 sm:flex-none items-center justify-center rounded-lg h-10 px-6 bg-slate-200 dark:bg-[#382929] text-slate-900 dark:text-white hover:bg-slate-300 dark:hover:bg-[#4a3b3b] text-sm font-bold transition-colors">
+                                Edit Profile
+                            </button>
+<button class="flex-1 sm:flex-none items-center justify-center rounded-lg h-10 px-6 bg-primary text-white hover:bg-red-700 text-sm font-bold shadow-lg shadow-primary/30 transition-all flex gap-2">
+<span class="material-symbols-outlined text-lg">group_add</span>
+                                Invite
+                            </button>
+</div>
+</div>
+<p class="text-slate-600 dark:text-slate-400 text-sm mt-2 max-w-2xl leading-relaxed">
+                        Popcorn enthusiast and horror movie aficionado. Always down for a Friday night group watch. Currently obsessed with 80s sci-fi.
+                    </p>
+<div class="flex gap-6 mt-4 text-sm text-slate-500 dark:text-[#9ca3af]">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-lg">calendar_month</span> Joined March 2023</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-lg">location_on</span> New York, USA</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Stats Grid -->
+<section class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+<div class="flex flex-col gap-1 rounded-xl p-5 bg-white dark:bg-[#2C2020] border border-slate-200 dark:border-transparent hover:border-primary/30 transition-colors group">
+<div class="flex items-center gap-2 mb-2">
+<span class="p-2 rounded-lg bg-red-100 dark:bg-primary/20 text-primary group-hover:bg-primary group-hover:text-white transition-colors material-symbols-outlined">schedule</span>
+<p class="text-slate-500 dark:text-[#b89d9f] text-sm font-bold uppercase tracking-wider">Hours</p>
+</div>
+<p class="text-slate-900 dark:text-white text-3xl font-bold">124</p>
+</div>
+<div class="flex flex-col gap-1 rounded-xl p-5 bg-white dark:bg-[#2C2020] border border-slate-200 dark:border-transparent hover:border-primary/30 transition-colors group">
+<div class="flex items-center gap-2 mb-2">
+<span class="p-2 rounded-lg bg-red-100 dark:bg-primary/20 text-primary group-hover:bg-primary group-hover:text-white transition-colors material-symbols-outlined">groups</span>
+<p class="text-slate-500 dark:text-[#b89d9f] text-sm font-bold uppercase tracking-wider">Groups</p>
+</div>
+<p class="text-slate-900 dark:text-white text-3xl font-bold">5</p>
+</div>
+<div class="flex flex-col gap-1 rounded-xl p-5 bg-white dark:bg-[#2C2020] border border-slate-200 dark:border-transparent hover:border-primary/30 transition-colors group">
+<div class="flex items-center gap-2 mb-2">
+<span class="p-2 rounded-lg bg-red-100 dark:bg-primary/20 text-primary group-hover:bg-primary group-hover:text-white transition-colors material-symbols-outlined">movie</span>
+<p class="text-slate-500 dark:text-[#b89d9f] text-sm font-bold uppercase tracking-wider">Watched</p>
+</div>
+<p class="text-slate-900 dark:text-white text-3xl font-bold">42</p>
+</div>
+<div class="flex flex-col gap-1 rounded-xl p-5 bg-white dark:bg-[#2C2020] border border-slate-200 dark:border-transparent hover:border-primary/30 transition-colors group">
+<div class="flex items-center gap-2 mb-2">
+<span class="p-2 rounded-lg bg-red-100 dark:bg-primary/20 text-primary group-hover:bg-primary group-hover:text-white transition-colors material-symbols-outlined">military_tech</span>
+<p class="text-slate-500 dark:text-[#b89d9f] text-sm font-bold uppercase tracking-wider">Badges</p>
+</div>
+<p class="text-slate-900 dark:text-white text-3xl font-bold">8</p>
+</div>
+</section>
+<!-- Main Dashboard Content -->
+<div class="flex flex-col lg:flex-row gap-8">
+<!-- Left Column: Content Tabs & Lists -->
+<div class="w-full lg:w-3/4 flex flex-col gap-8">
+<!-- Tabs Navigation -->
+<div class="border-b border-slate-200 dark:border-[#533c3d]">
+<div class="flex gap-8 overflow-x-auto">
+<a class="flex items-center gap-2 border-b-[3px] border-b-primary text-slate-900 dark:text-white pb-3 px-1" href="#">
+<span class="material-symbols-outlined text-[20px]">history</span>
+<span class="text-sm font-bold tracking-wide">History</span>
+</a>
+<a class="flex items-center gap-2 border-b-[3px] border-b-transparent text-slate-500 dark:text-[#b89d9f] hover:text-slate-700 dark:hover:text-white transition-colors pb-3 px-1" href="#">
+<span class="material-symbols-outlined text-[20px]">bookmark</span>
+<span class="text-sm font-bold tracking-wide">My List</span>
+</a>
+<a class="flex items-center gap-2 border-b-[3px] border-b-transparent text-slate-500 dark:text-[#b89d9f] hover:text-slate-700 dark:hover:text-white transition-colors pb-3 px-1" href="#">
+<span class="material-symbols-outlined text-[20px]">folder_shared</span>
+<span class="text-sm font-bold tracking-wide">Shared Lists</span>
+</a>
+</div>
+</div>
+<!-- Recently Watched (History Content) -->
+<div>
+<div class="flex justify-between items-end mb-6">
+<h2 class="text-xl font-bold text-slate-900 dark:text-white">Recently Watched</h2>
+<a class="text-sm font-bold text-primary hover:text-red-400 flex items-center gap-1" href="#">
+                            View All <span class="material-symbols-outlined text-base">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+<!-- History Item 1 -->
+<div class="flex gap-4 bg-white dark:bg-[#2C2020] p-3 rounded-lg hover:bg-slate-50 dark:hover:bg-[#382929] transition-colors cursor-pointer group">
+<div class="relative w-24 shrink-0 rounded-md overflow-hidden aspect-[2/3]">
+<div class="bg-cover bg-center h-full w-full" data-alt="Dune Part Two movie poster" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC0Z3JRUo1lTi2EKlJulmp3uLp7B_rwc-tT_pH0PPxFwlgwFltgZ6Ctsz0WctP1WpwwAFfwKkT6LjHGfNwIcd9geNrYqjTIRKTZxiacwpSGBBh1i02kQc5sEyk7DRWjGPxbWRJIK071KJ0vU_5IK_SJL-7liyqI2drqTZpW7jAMaQPF4R9Hm9g2SlSDY4J-sxxlkKEQTKEDGbi733iAlxtO0jxU4TE9vg01CUYG9GnV8DF9CV_Rj4YnM4dAq-XUet_EgFjphwF3_XY");'></div>
+<div class="absolute bottom-0 left-0 h-1 bg-slate-700 w-full">
+<div class="h-full bg-primary w-[85%]"></div>
+</div>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+<span class="material-symbols-outlined text-white text-3xl drop-shadow-lg">play_circle</span>
+</div>
+</div>
+<div class="flex flex-col justify-between py-1 flex-1">
+<div>
+<h3 class="text-slate-900 dark:text-white font-bold leading-tight mb-1 group-hover:text-primary transition-colors">Dune: Part Two</h3>
+<p class="text-xs text-slate-500 dark:text-slate-400">2h 15m remaining</p>
+</div>
+<div>
+<p class="text-[10px] uppercase font-bold text-slate-400 dark:text-[#7f6a6c] mb-1">Watched with</p>
+<div class="flex -space-x-2 overflow-hidden">
+<div class="inline-block size-6 rounded-full ring-2 ring-white dark:ring-[#2C2020] bg-cover bg-center" data-alt="Friend avatar 1" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCkZgj4-HzicdfHAONaXASaF4Cds-AhG6HabXLoUJY5nzcJGrQtIPhcJiNeHQvWyMumy-D_9RHySZi6xb_NXsXnzWaBMi0dw1JExGR56WJqXCX4JNSxzo6UwARtXLR33rLEPQ3lC6lMqNYMzHSu9HKhLSmbsBxMmPRvS0vFzFvqVdGuJ-eq1UVWyrkH4GcQqoEt6vpEN80x-miK8Ze2TZNxs1xJKfq-vdIxkZmKSuzMV7zWTAdu35hS78v3F_wLE6w16NWj3QjI-uc")'></div>
+<div class="inline-block size-6 rounded-full ring-2 ring-white dark:ring-[#2C2020] bg-cover bg-center" data-alt="Friend avatar 2" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBYP3_QS7S0d_AzFqguSIxWR1qpLf6DxqdR4C_-FwDt4P-LKZzX-Up5FReQEhIR5wkBvuDW4mkDwg3JWlEvknOzLuIlVB4fFpzpSB76nla-qe9E_pXZUjAQLLuiK9RoRt41WlWuUIb2cWG17MktRNYY-zZQ0tLI0jU9hWqZsdKYuK2jztP29l_ndLwzIYWfH8L9c7zkU-t8J5AmhPTHLVmUmx2sbu9jYBN8MLEij5nCUYDDIRrBjHMY-RxwkYQ-H2wl4TWlWkFNfjU")'></div>
+</div>
+</div>
+</div>
+</div>
+<!-- History Item 2 -->
+<div class="flex gap-4 bg-white dark:bg-[#2C2020] p-3 rounded-lg hover:bg-slate-50 dark:hover:bg-[#382929] transition-colors cursor-pointer group">
+<div class="relative w-24 shrink-0 rounded-md overflow-hidden aspect-[2/3]">
+<div class="bg-cover bg-center h-full w-full" data-alt="Interstellar movie poster" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAP6KHVc76RR8-aTzOzbi3eVP_-Fcy_QEyzBpFFZjUp5EJ_XV5H-DW1OkTio6E4ri6O9m8XHcrY6eenjAWhdDRbg6urIhPh-3Fxg8cj0ETTq3eD7wEM-LnhhVH_-hOGUElZwZiFT85sJ86kxPCodUPeOkEdsXu7PgpFaImZbj6bvFYSUapJOCWXhP_BvadkYZaFD5ktS7aUxWCKu6ojwEmvuQlISn5cEzXxdidFLFe6KpEPNVxOmBI22ajRgnKXnSs6fqqGVsjQXGY");'></div>
+<div class="absolute bottom-0 left-0 h-1 bg-slate-700 w-full">
+<div class="h-full bg-primary w-[100%]"></div>
+</div>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+<span class="material-symbols-outlined text-white text-3xl drop-shadow-lg">replay</span>
+</div>
+</div>
+<div class="flex flex-col justify-between py-1 flex-1">
+<div>
+<h3 class="text-slate-900 dark:text-white font-bold leading-tight mb-1 group-hover:text-primary transition-colors">Interstellar</h3>
+<p class="text-xs text-slate-500 dark:text-slate-400">Completed</p>
+</div>
+<div>
+<p class="text-[10px] uppercase font-bold text-slate-400 dark:text-[#7f6a6c] mb-1">Watched with</p>
+<div class="flex -space-x-2 overflow-hidden">
+<div class="inline-block size-6 rounded-full ring-2 ring-white dark:ring-[#2C2020] bg-cover bg-center" data-alt="Friend avatar 3" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBy_ILomkYX42hh-V1bAMPR8CQ6n4uLx5R4bM2mIt8MilskeXyyPj7hlI_qdzMoR1LMqImDvPhGGpI9ym-3PwN8rjXZ2yewLBAtHMrv2ZpHIpEgHk4or0kMCDPpJ2WFYhs5b5jRARluWKzEUs2FuoTbj9z47E1rmk17GSimncGK7XuSAqxR1dtVlpwVld6_lkh1ge_GixXvLrSAQZNqcI4DW0Nkte-6lUQayaqD373bYdmIFbdygcj8HCnswBuRtst4hhwaDWXRofI")'></div>
+</div>
+</div>
+</div>
+</div>
+<!-- History Item 3 -->
+<div class="flex gap-4 bg-white dark:bg-[#2C2020] p-3 rounded-lg hover:bg-slate-50 dark:hover:bg-[#382929] transition-colors cursor-pointer group">
+<div class="relative w-24 shrink-0 rounded-md overflow-hidden aspect-[2/3]">
+<div class="bg-cover bg-center h-full w-full" data-alt="Abstract colorful movie poster" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCXENnGNal0htARSfjpyWnfBkMMgwklglixqLOk9d9F6rMlVlc9HIiTrBSrVLPUUTEP3bBy_gA531a_je-vK1fqFaj-GHEMZaEWJJ0C24bs4M-IDVcwdoUSAcTMJt9cBS3OvUgavOkWFC-nmocRGMZzGVWYclt1HvwGhLM0ACXAglu5Don9_bAIEPOmDL55U97zOQFToSB0iE_PbXQOr5TBCyIbNmMz75oiKtaFxM_o4THGWwBTWe1K3k2g8j8QXsRxEzaMXCeNNqU");'></div>
+<div class="absolute bottom-0 left-0 h-1 bg-slate-700 w-full">
+<div class="h-full bg-primary w-[45%]"></div>
+</div>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+<span class="material-symbols-outlined text-white text-3xl drop-shadow-lg">play_circle</span>
+</div>
+</div>
+<div class="flex flex-col justify-between py-1 flex-1">
+<div>
+<h3 class="text-slate-900 dark:text-white font-bold leading-tight mb-1 group-hover:text-primary transition-colors">Cyberpunk: Edgerunners</h3>
+<p class="text-xs text-slate-500 dark:text-slate-400">Ep. 4 â€¢ 12m left</p>
+</div>
+<div class="flex items-center gap-2 mt-2">
+<span class="bg-[#382929] text-[#b89d9f] text-[10px] px-2 py-1 rounded">Solo Watch</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="mt-6 flex flex-col gap-4">
+    <div class="flex items-center justify-between p-4 bg-white dark:bg-[#2C2020] rounded-xl border border-slate-200 dark:border-transparent hover:border-primary/50 transition-all cursor-pointer group">
+        <div class="flex items-center gap-4">
+            <div class="size-12 bg-indigo-500 rounded-lg flex items-center justify-center text-white font-bold">SF</div>
+            <div>
+                <h4 class="text-slate-900 dark:text-white font-bold group-hover:text-primary transition-colors">Sci-Fi Classics</h4>
+                <p class="text-xs text-slate-500 dark:text-[#b89d9f]">Shared with Friday Night Crew • 12 items</p>
+            </div>
+        </div>
+        <span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">arrow_forward</span>
+    </div>
+    <div class="flex items-center justify-between p-4 bg-white dark:bg-[#2C2020] rounded-xl border border-slate-200 dark:border-transparent hover:border-primary/50 transition-all cursor-pointer group">
+        <div class="flex items-center gap-4">
+            <div class="size-12 bg-primary/20 rounded-lg flex items-center justify-center text-primary font-bold">H</div>
+            <div>
+                <h4 class="text-slate-900 dark:text-white font-bold group-hover:text-primary transition-colors">Horror Marathon</h4>
+                <p class="text-xs text-slate-500 dark:text-[#b89d9f]">Shared with Horror Fans • 8 items</p>
+            </div>
+        </div>
+        <span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">arrow_forward</span>
+    </div>
+</div>
+ <!-- Recommended Section (Horizontal Scroll) -->
+<div class="mt-8">
+<h2 class="text-xl font-bold text-slate-900 dark:text-white mb-4">Recommended for your Group</h2>
+<div class="relative">
+<div class="flex gap-4 overflow-x-auto pb-4 snap-x">
+<!-- Card 1 -->
+<div class="min-w-[160px] w-[160px] snap-center flex flex-col gap-2 group cursor-pointer">
+<div class="relative aspect-[2/3] rounded-lg overflow-hidden transition-transform duration-300 group-hover:scale-105 shadow-lg group-hover:shadow-primary/20">
+<div class="bg-cover bg-center w-full h-full" data-alt="Stranger Things poster" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDOQQ9JjNkpnj1liRf32zW56HpgRIMPfDV9ktbzVDLFRAWFBRrW9HxH5SbKxGXWz_-ufmchG0vomOeS5OCUfNlaw2XDU7znWOR5IrwbDtiAPyDX8jeg4jG4GWlRsA-etRxD4-Cwusc0FN8syns1sBDNU7VTzu-acVlRq8tOowKXu3xlT9gh5Apr69_YczVOS0mr4ex6yG26gcscen8NCQ-K-Q6nMCC3R9Im22uL4-bWU-nWL4nb4-oF26jmqsMQ3APLBey4K3kXJv8"); filter: hue-rotate(45deg);'></div>
+<div class="absolute top-2 right-2 bg-black/60 backdrop-blur-sm p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-white text-sm block">add</span>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-3">
+<button class="bg-primary text-white text-xs font-bold py-2 rounded shadow-lg">Group Watch</button>
+</div>
+</div>
+<h3 class="text-sm font-bold text-slate-900 dark:text-white truncate">Stranger Things</h3>
+<div class="flex items-center gap-1 text-xs text-slate-500 dark:text-[#b89d9f]">
+<span class="material-symbols-outlined text-[14px]">star</span> 96% Match
+                                </div>
+</div>
+<!-- Card 2 -->
+<div class="min-w-[160px] w-[160px] snap-center flex flex-col gap-2 group cursor-pointer">
+<div class="relative aspect-[2/3] rounded-lg overflow-hidden transition-transform duration-300 group-hover:scale-105 shadow-lg group-hover:shadow-primary/20">
+<div class="bg-cover bg-center w-full h-full" data-alt="Breaking Bad poster" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBMplsId8sXZnGVSAuuS8X1gtCU4W3Ayo_wy2KBw7-zeIkiK3TUz884r8NOJFIKYOGBOhJc84-eCrvLljCf8RGa_mIR5gC1tP3gLZZUpiJ8-MhBhAfshzkvZUJL3ALVLHxrFlVGuRQOTX0YwqgrSNkGsTGChdHzk1ERFjMiI03Mp_FiXFQuYQgYBZk3Oc567bPSdVWA2XqV1Tvj2YE9FYKcp9Zci2X4WSjzfwF3CFqBiuMWwcp3wJfOPchSJdFYZIB7p35j3aGU8a8");'></div>
+<div class="absolute top-2 right-2 bg-black/60 backdrop-blur-sm p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-white text-sm block">add</span>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-3">
+<button class="bg-primary text-white text-xs font-bold py-2 rounded shadow-lg">Group Watch</button>
+</div>
+</div>
+<h3 class="text-sm font-bold text-slate-900 dark:text-white truncate">Breaking Bad</h3>
+<div class="flex items-center gap-1 text-xs text-slate-500 dark:text-[#b89d9f]">
+<span class="material-symbols-outlined text-[14px]">star</span> 98% Match
+                                </div>
+</div>
+<!-- Card 3 -->
+<div class="min-w-[160px] w-[160px] snap-center flex flex-col gap-2 group cursor-pointer">
+<div class="relative aspect-[2/3] rounded-lg overflow-hidden transition-transform duration-300 group-hover:scale-105 shadow-lg group-hover:shadow-primary/20">
+<div class="bg-cover bg-center w-full h-full" data-alt="Inception poster" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCr6cK7M-oB5-qwi-zFn7W-5fw0GUmVXYGwCwJlQ2VhshyxNRmVog7jsTvVs8z4xZQ8jE9tMHSbc--yXZ20hf8C11vhlw48W-e0k8ks2ddsv51b5Zbgp6dft_ZWAUTTme3dVij3lHxcug32LWglWBuD7srleN1GjQ-j0LnnWZsy-kHXyCshKgrO7NOzCbYZrZcS4CPPBIuZNvKWtuxsgidlKdgnE2UmDflhBkJPjdXhDJGsQXwOoRZaYweARwWLyFVmWLEC31ozfdw");'></div>
+<div class="absolute top-2 right-2 bg-black/60 backdrop-blur-sm p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-white text-sm block">add</span>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-3">
+<button class="bg-primary text-white text-xs font-bold py-2 rounded shadow-lg">Group Watch</button>
+</div>
+</div>
+<h3 class="text-sm font-bold text-slate-900 dark:text-white truncate">Inception</h3>
+<div class="flex items-center gap-1 text-xs text-slate-500 dark:text-[#b89d9f]">
+<span class="material-symbols-outlined text-[14px]">star</span> 91% Match
+                                </div>
+</div>
+<!-- Card 4 -->
+<div class="min-w-[160px] w-[160px] snap-center flex flex-col gap-2 group cursor-pointer">
+<div class="relative aspect-[2/3] rounded-lg overflow-hidden transition-transform duration-300 group-hover:scale-105 shadow-lg group-hover:shadow-primary/20">
+<div class="bg-cover bg-center w-full h-full" data-alt="Dark abstract movie poster" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDzfwEtCly0lJuBZCYfENtrkrpiQpg2nmsDkJM_iwRZNd3BC0h0GsUe1Ap0bNHjTjHrdLVVhwwTM_Fkg2nThLmvftakRwy8uabllxKOQZ7Xalj02tRJjwGUzSCSXbSGA5h6YzflgGWyNvTb-Atrciyzj4uZGSnuiQNzkfGZcztD9XX3yHVhyWmjBN62AkNczDQKKyGQpyX9iOLnxh29x-M217i114OtWNBX02J50snqzzaHJvDpK2hSj_fG7K34cqw81Ur4AMAltRU");'></div>
+<div class="absolute top-2 right-2 bg-black/60 backdrop-blur-sm p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-white text-sm block">add</span>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-3">
+<button class="bg-primary text-white text-xs font-bold py-2 rounded shadow-lg">Group Watch</button>
+</div>
+</div>
+<h3 class="text-sm font-bold text-slate-900 dark:text-white truncate">The Dark Knight</h3>
+<div class="flex items-center gap-1 text-xs text-slate-500 dark:text-[#b89d9f]">
+<span class="material-symbols-outlined text-[14px]">star</span> 99% Match
+                                </div>
+</div>
+<!-- Card 5 -->
+<div class="min-w-[160px] w-[160px] snap-center flex flex-col gap-2 group cursor-pointer">
+<div class="relative aspect-[2/3] rounded-lg overflow-hidden transition-transform duration-300 group-hover:scale-105 shadow-lg group-hover:shadow-primary/20">
+<div class="bg-cover bg-center w-full h-full" data-alt="Scifi neon movie poster" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDeUO6P6jnjQdHcWJdHLQfEw32-ccjos-pNIMkKu9fJOExTdjW45XyzKph3gUO7zS2sWFDHqh810ZAOcSdQK6tUJsM1Rzp-j22TAGoWRdeirDeHVIBhqUuzEJLeKLa2Ua88AXg6ZN1My6SQfgzm205Wlr5rNejCYeA4B2KlPGfhtMVw6cPOnnQvUTrQ-ta3SIomMpkArblKyMS0Si4i5bXffvssLkK3dlLiOqfU5CPr3D2hcqzMC69zWvvskp21VCg8YAALb6jZ9-A");'></div>
+<div class="absolute top-2 right-2 bg-black/60 backdrop-blur-sm p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-white text-sm block">add</span>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-3">
+<button class="bg-primary text-white text-xs font-bold py-2 rounded shadow-lg">Group Watch</button>
+</div>
+</div>
+<h3 class="text-sm font-bold text-slate-900 dark:text-white truncate">Blade Runner 2049</h3>
+<div class="flex items-center gap-1 text-xs text-slate-500 dark:text-[#b89d9f]">
+<span class="material-symbols-outlined text-[14px]">star</span> 88% Match
+                                </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Sidebar (Friends & Lists) -->
+<div class="w-full lg:w-1/4 flex flex-col gap-6">
+<!-- Shared Groups Widget -->
+<div class="bg-white dark:bg-[#2C2020] rounded-xl p-5 border border-slate-200 dark:border-transparent">
+<div class="flex justify-between items-center mb-4">
+<h3 class="font-bold text-slate-900 dark:text-white">Your Squads</h3>
+<button class="text-primary hover:bg-primary/10 p-1 rounded">
+<span class="material-symbols-outlined text-xl">add</span>
+</button>
+</div>
+<div class="flex flex-col gap-3">
+<div class="flex items-center justify-between p-3 rounded-lg bg-slate-50 dark:bg-[#382929] hover:bg-slate-100 dark:hover:bg-[#4a3b3b] cursor-pointer transition-colors">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-lg bg-indigo-500 flex items-center justify-center text-white font-bold">
+                                    FN
+                                </div>
+<div>
+<p class="text-sm font-bold text-slate-900 dark:text-white">Friday Night</p>
+<p class="text-xs text-slate-500 dark:text-[#b89d9f]">4 Members</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-400 text-lg">chevron_right</span>
+</div>
+<div class="flex items-center justify-between p-3 rounded-lg bg-slate-50 dark:bg-[#382929] hover:bg-slate-100 dark:hover:bg-[#4a3b3b] cursor-pointer transition-colors">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-lg bg-orange-500 flex items-center justify-center text-white font-bold">
+                                    HF
+                                </div>
+<div>
+<p class="text-sm font-bold text-slate-900 dark:text-white">Horror Fans</p>
+<p class="text-xs text-slate-500 dark:text-[#b89d9f]">6 Members</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-400 text-lg">chevron_right</span>
+</div>
+<div class="flex items-center justify-between p-3 rounded-lg bg-slate-50 dark:bg-[#382929] hover:bg-slate-100 dark:hover:bg-[#4a3b3b] cursor-pointer transition-colors">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-lg bg-emerald-500 flex items-center justify-center text-white font-bold">
+                                    AD
+                                </div>
+<div>
+<p class="text-sm font-bold text-slate-900 dark:text-white">Anime Duo</p>
+<p class="text-xs text-slate-500 dark:text-[#b89d9f]">2 Members</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-400 text-lg">chevron_right</span>
+</div>
+</div>
+</div>
+<!-- Recent Activity Feed -->
+<div class="bg-white dark:bg-[#2C2020] rounded-xl p-5 border border-slate-200 dark:border-transparent flex-1">
+<h3 class="font-bold text-slate-900 dark:text-white mb-4">Friends Activity</h3>
+<div class="space-y-6 relative before:absolute before:left-[19px] before:top-2 before:bottom-2 before:w-[2px] before:bg-slate-200 dark:before:bg-[#382929]">
+<div class="relative pl-10">
+<div class="absolute left-0 top-0 size-10 rounded-full border-4 border-white dark:border-[#2C2020] bg-cover bg-center" data-alt="Friend avatar Sarah" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCQ2ygtRUKb8EZL9ewmnCI_c7lye_sWQmqN9X0VbbfcGxSBdbYzClHAhm3RZqm6NphVGsmOICAp7Lmmm8Ked4kvjxXiInz5R3OZcjE5EL3-UVjF1DtpSAWc1Q96M3Puw6CfyUo6upijyd0YpYrpJJtEK_9KOnr5lUzDOlC3krJ2vPcqumnnrhuTKOD77rRRNTQKtoXWcgTBx4N3tsNyay2A2U-AjRgFVW9YtQfAqWK_p0PO6cfv0ytaguCp_hD02DwSvEsLq8cSE6I");'></div>
+<p class="text-sm text-slate-900 dark:text-white"><span class="font-bold">Sarah</span> added <span class="font-medium text-primary">The Matrix</span> to <span class="italic">Sci-Fi List</span></p>
+<p class="text-xs text-slate-500 dark:text-[#b89d9f] mt-1">2 hours ago</p>
+</div>
+<div class="relative pl-10">
+<div class="absolute left-0 top-0 size-10 rounded-full border-4 border-white dark:border-[#2C2020] bg-cover bg-center" data-alt="Friend avatar Mike" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC9Nq3t65XOdcpvmAM7qM88HcCklcI1FSo-ksW17bJLunsXSRaUo6u_PR8HYacv4Dk8LgLnAWsqBJ-UZJC9y1msXKVIt-p7-HLfT0RBN1-5PDlI0BS2okLttFZsWLXVsUe1-ZB82MYEyvDETcF9y6CiBlG03aSYV12eFUMIbYOtmCCTpUHJSq9qUa1vErmz4NsF8XxWUGWHFPVTopsXPfpVP5Mo43kOMq7BD91nlp2FPA9ta8cClKSmbFnw4H1hctsmfYPSXEAl8t0");'></div>
+<p class="text-sm text-slate-900 dark:text-white"><span class="font-bold">Mike</span> finished watching <span class="font-medium text-primary">Arcane</span></p>
+<p class="text-xs text-slate-500 dark:text-[#b89d9f] mt-1">5 hours ago</p>
+</div>
+<div class="relative pl-10">
+<div class="absolute left-0 top-0 size-10 rounded-full border-4 border-white dark:border-[#2C2020] bg-cover bg-center" data-alt="Friend avatar Jess" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCCuaGZ2-afkDKk3sxoOvXH-s25w9veNZhZLCYoT91UWiAXybDhz390jAwu4GuQFMcyGsuF-PnE_ZqcTsIX5tDeUke01rC5uvjWy_zjpDZn_X_yU1NOW7fmxhZtODf0OJGnRFiqTXGq04oQLaolcHrIs1QFUZO169KgsJ5bDb-RDaIRniJLGMO2xPiXWl7_R93_Py9o0emnrDcH3xxU2UDVLKt6U3H4t7iyyap_7EGQBS4LKqZ6MDyC_1XXoA4uQsjTnndOSlg5x68");'></div>
+<p class="text-sm text-slate-900 dark:text-white"><span class="font-bold">Jess</span> earned the <span class="font-medium text-yellow-500">Marathon Runner</span> badge</p>
+<p class="text-xs text-slate-500 dark:text-[#b89d9f] mt-1">1 day ago</p>
+</div>
+</div>
+</div>
+<!-- Ad / Promotion Space -->
+<div class="bg-gradient-to-br from-primary to-rose-700 rounded-xl p-6 text-white text-center shadow-lg">
+<h3 class="font-bold text-lg mb-2">Upgrade to Pro</h3>
+<p class="text-white/90 text-sm mb-4">Watch in 4K with unlimited friends and zero ads.</p>
+<button class="bg-white text-primary px-4 py-2 rounded-lg text-sm font-bold w-full hover:bg-gray-100 transition-colors">Start Free Trial</button>
+</div>
+</div>
+</div>
+</main>
+</body></html>
+
+
+
+
+

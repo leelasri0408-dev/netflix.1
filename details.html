@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GroupWatch - Content Details</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ea2a33",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#211111",
+                        "card-dark": "#2d1b1b", // Slightly lighter for cards
+                        "surface-dark": "#181111" // Deep background
+                    },
+                    fontFamily: {
+                        "display": ["Spline Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: "Spline Sans", sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        /* Custom scrollbar for clean look */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #211111; }
+        ::-webkit-scrollbar-thumb { background: #382929; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #4a3b3b; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white overflow-x-hidden min-h-screen flex flex-col font-display">
+<!-- Navbar -->
+<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-[#382929] bg-background-light dark:bg-[#181111] px-10 py-3">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-primary">
+<div class="size-8 flex items-center justify-center">
+<span class="material-symbols-outlined text-3xl">groups</span>
+</div>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">GroupWatch</h2>
+</div>
+<nav class="hidden md:flex items-center gap-9">
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary text-sm font-medium leading-normal transition-colors" href="home.html">Home</a>
+<a class="text-slate-900 dark:text-white text-sm font-medium leading-normal" href="browse.html">Movies</a>
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary text-sm font-medium leading-normal transition-colors" href="browse.html">TV Shows</a>
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary text-sm font-medium leading-normal transition-colors" href="profile.html">My List</a>
+</nav>
+</div>
+<div class="flex flex-1 justify-end gap-6 items-center">
+<label class="hidden lg:flex flex-col min-w-40 !h-10 max-w-64 group">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full bg-white dark:bg-[#382929] border border-transparent group-focus-within:border-primary/50 transition-all">
+<div class="text-slate-400 dark:text-[#b89d9f] flex items-center justify-center pl-4 rounded-l-lg">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input class="flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-900 dark:text-white focus:outline-0 bg-transparent placeholder:text-slate-400 dark:placeholder:text-[#b89d9f] px-4 pl-2 text-sm font-normal leading-normal" placeholder="Search titles, friends..." value=""/>
+</div>
+</label>
+<button class="flex items-center justify-center rounded-lg size-10 bg-white dark:bg-[#382929] hover:bg-slate-100 dark:hover:bg-[#4a3b3b] text-slate-900 dark:text-white transition-colors relative">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-primary rounded-full border-2 border-white dark:border-[#382929]"></span>
+</button>
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-10 border-2 border-transparent hover:border-primary cursor-pointer transition-all" data-alt="User profile avatar showing a smiling person" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA7ZKvJ8CL43RHdSjB882K_kMRY9X001Pvz3vKN5RN_US6XXo8wiExMpKebL3br7a3aoOagSdyWayHnOv2XcX4ZVEhbpEOXpZTYPhZup3MuzkartXk0LsONLjt02c0lazcVWfBFbA75En0xaUll-0RIkfj8ZakPhQctB_aLcheBlSaXInp4WyFKbcrnJq2TbP8u6Y_CMovnfR-j_zz7BJKlAMxowMx7fUGUdxIKHjP3ZaMTBJiInoTrFUUZLOrihcUjPRo-9qAqFxU");'></div>
+</div>
+</header>
+<main class="flex-1 flex flex-col relative">
+<!-- Hero Background -->
+<div class="absolute inset-0 h-[600px] w-full z-0 overflow-hidden">
+<!-- Gradient Overlay -->
+<div class="absolute inset-0 bg-gradient-to-t from-background-light dark:from-background-dark via-background-light/80 dark:via-background-dark/90 to-transparent z-10"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-background-light dark:from-background-dark via-background-light/60 dark:via-background-dark/80 to-transparent z-10"></div>
+<!-- Hero Image -->
+<div class="w-full h-full bg-cover bg-top" data-alt="Cinematic shot of space exploration scene from Interstellar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBqo0vcMdd2GlMEZA4KtwBKEKQa69Wg833TkH9hIe3PQQsdaIteRZjFmCWdl8JTDVdDJsYPB6K4WXYi-2XM20hMrc4N5KafwVoTTJRHBU9IhhyaPb3Vi0wwnMZUtuJQV14LnYor0NLpYCHLJvBTE4xut-kyPHHEOUvRBYgXQh_5yE_1eisxkZdGaGZ6CHYtgfF-2phitx-h08vYVtTVZotRpHBlUV-BCeYs6qJzhu8G6h09VrR24PUCaYpIzciAO9QyIvJFO5H9Z20");'></div>
+</div>
+<div class="layout-container flex flex-col z-10 px-6 lg:px-20 xl:px-40 pb-20 pt-10">
+<!-- Top Content Section -->
+<div class="flex flex-col lg:flex-row gap-12 mt-10">
+<!-- Left Column: Media Info -->
+<div class="flex flex-col flex-1 max-w-[800px]">
+<!-- Breadcrumbs -->
+<div class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 mb-4">
+<span class="hover:text-primary cursor-pointer">Movies</span>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="hover:text-primary cursor-pointer">Sci-Fi</span>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="text-slate-900 dark:text-white font-medium">Interstellar</span>
+</div>
+<!-- Title -->
+<h1 class="text-slate-900 dark:text-white tracking-tight text-5xl lg:text-7xl font-bold leading-[0.9] mb-4">Interstellar</h1>
+<!-- Meta Data -->
+<div class="flex flex-wrap items-center gap-4 lg:gap-6 text-slate-600 dark:text-[#b89d9f] text-sm font-medium mb-6">
+<span class="bg-slate-200 dark:bg-[#382929] text-slate-900 dark:text-white px-2 py-0.5 rounded text-xs uppercase font-bold tracking-wider">PG-13</span>
+<span>2014</span>
+<span>•</span>
+<span>2h 49m</span>
+<span>•</span>
+<div class="flex items-center gap-1 text-yellow-500">
+<span class="material-symbols-outlined text-base fill-current">star</span>
+<span class="text-slate-900 dark:text-white font-bold">8.6</span>
+<span class="text-xs text-slate-500 dark:text-slate-400 font-normal">IMDb</span>
+</div>
+<span>•</span>
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-base fill-current">favorite</span>
+<span class="text-slate-900 dark:text-white font-bold">92%</span>
+<span class="text-xs text-slate-500 dark:text-slate-400 font-normal">Friend Match</span>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-wrap items-center gap-4 mb-8">
+<button class="flex h-12 items-center justify-center gap-2 rounded-lg bg-primary hover:bg-red-600 text-white px-8 text-base font-bold shadow-lg shadow-primary/20 transition-all transform hover:scale-105 active:scale-95">
+<span class="material-symbols-outlined">play_circle</span>
+                            Start Group Watch
+                        </button>
+<button class="flex h-12 items-center justify-center gap-2 rounded-lg bg-slate-200 dark:bg-[#382929] hover:bg-slate-300 dark:hover:bg-[#4a3b3b] text-slate-900 dark:text-white px-6 text-sm font-bold transition-all">
+<span class="material-symbols-outlined">add</span>
+                            Watchlist
+                        </button>
+<button class="flex h-12 w-12 items-center justify-center rounded-lg border border-slate-300 dark:border-[#382929] hover:border-primary/50 hover:bg-primary/10 text-slate-900 dark:text-white transition-all tooltip" title="Share">
+<span class="material-symbols-outlined">ios_share</span>
+</button>
+</div>
+<!-- Synopsis -->
+<p class="text-slate-700 dark:text-slate-300 text-lg leading-relaxed max-w-2xl mb-8">
+                        Earth's future has been riddled by disasters, famines, and droughts. There is only one way to ensure mankind's survival: Interstellar travel. A newly discovered wormhole in the far reaches of our solar system allows a team of astronauts to go where no man has gone before, a planet that may have the right environment to sustain human life.
+                    </p>
+<!-- Genres -->
+<div class="flex gap-3 flex-wrap mb-10">
+<div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full border border-slate-300 dark:border-[#382929] bg-transparent hover:bg-slate-100 dark:hover:bg-[#2d1b1b] px-4 cursor-pointer transition-colors">
+<p class="text-slate-700 dark:text-slate-300 text-xs font-medium uppercase tracking-wide">Sci-Fi</p>
+</div>
+<div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full border border-slate-300 dark:border-[#382929] bg-transparent hover:bg-slate-100 dark:hover:bg-[#2d1b1b] px-4 cursor-pointer transition-colors">
+<p class="text-slate-700 dark:text-slate-300 text-xs font-medium uppercase tracking-wide">Adventure</p>
+</div>
+<div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full border border-slate-300 dark:border-[#382929] bg-transparent hover:bg-slate-100 dark:hover:bg-[#2d1b1b] px-4 cursor-pointer transition-colors">
+<p class="text-slate-700 dark:text-slate-300 text-xs font-medium uppercase tracking-wide">Drama</p>
+</div>
+</div>
+</div>
+<!-- Right Column: Trailer & Friends -->
+<div class="flex flex-col w-full lg:w-[420px] shrink-0 gap-6">
+<!-- Trailer Card -->
+<div class="group relative aspect-video w-full overflow-hidden rounded-xl bg-black shadow-2xl ring-1 ring-white/10" data-alt="Video player preview showing Cooper in a spacesuit">
+<div class="absolute inset-0 bg-cover bg-center opacity-80 group-hover:opacity-60 transition-opacity" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCgf3jkxeTRA7cqZI8DeNLharyJNGPuFZXqYOLXvzXxhpsExZqIEDYM8omMumMOnMHu_nFikID2bs7oQOPgKThk9QJAx8qFEyBb8CKtUZZITeo2rKfwMS_Jd3nClxAHB2TB0mpqytNu-KweILGCv8r6pfugo1NCyVtmVFmDDm0h10VqwDGfR6cLlNUP3vH1nRUcPKv8Ly8oLqGiXuWNs7jPRkaNLcaZwVnikPK9wjIcxq28nqfrjWXEIGBM8yyC2lQRIvqMDR04XO8");'></div>
+<button class="absolute inset-0 flex items-center justify-center z-20">
+<div class="flex size-16 items-center justify-center rounded-full bg-primary/90 text-white shadow-lg backdrop-blur-sm transition-transform group-hover:scale-110">
+<span class="material-symbols-outlined text-4xl ml-1">play_arrow</span>
+</div>
+</button>
+<div class="absolute bottom-4 left-4 z-20">
+<span class="text-white text-sm font-bold shadow-black drop-shadow-md">Watch Trailer</span>
+<span class="text-white/80 text-xs block">2:17</span>
+</div>
+</div>
+<!-- Friend Activity Card -->
+<div class="bg-white dark:bg-[#1f1616] rounded-xl p-5 border border-slate-200 dark:border-[#382929] shadow-sm">
+<div class="flex justify-between items-center mb-4">
+<h3 class="text-slate-900 dark:text-white font-bold text-lg">Friend Activity</h3>
+<button class="text-primary text-sm font-bold hover:underline">Invite Friends</button>
+</div>
+<div class="flex items-center gap-4 mb-4 pb-4 border-b border-slate-100 dark:border-[#382929]">
+<div class="flex -space-x-3 rtl:space-x-reverse">
+<div class="size-10 rounded-full border-2 border-white dark:border-[#1f1616] bg-cover" data-alt="Friend avatar 1" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC8UqnuBSiwYQba-17uvv045TxeJGHcBvEY0G0Zndo0ykP8BC4PDDwzVUTAW_EMwZccNy3tg_QB1BXu_nIgsL4_hWi4s_pKp0cOnDrdHYTuJl7JKx629IpkaoLTBYc9avKc1YhwhHlrUH618TffIxDzDz2w9UBkOjP48sxayy8fnxTBDpd13AmMpdP80I7FSPoixmIb-QrfhEuFuhQzwxJFQN0QtlKkgFMFxWH1AI2PeOGUgoC3YiwmP543uPX6lfHMLOm4kdzaKFk")'></div>
+<div class="size-10 rounded-full border-2 border-white dark:border-[#1f1616] bg-cover" data-alt="Friend avatar 2" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAUhNXxb82o9Gu_INJstM8okUyKnNnYF0GzV7vgAB_EDFLoIlzkG7hr1y4a5fycv1cmjzsmGSGhnh5IS1Ca6gEOP8DzcQex74WY0lTwvaDjZmscS2FZlXgpbgyeQ48JfqMyaiF8kQjz4G98BW9MeI921xLJBZwWADcoNyXjcRs9QHgLRRnDsdPQFHgfSZXM0QGRC9bdwPn18dAAYemC5XbHrI7GUt_wN18cSgbgCDmZ9OCH0I7qKlgJ5FUMycV02E2X_-lfxN5TAHs")'></div>
+<div class="size-10 rounded-full border-2 border-white dark:border-[#1f1616] bg-cover" data-alt="Friend avatar 3" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAr0q3j5t4GMoBREg2a4VUhVR3qhQBUt-5IxJYLZA5v0QXYfPWA01ZbOU9X2evB9f4XZlAC1I3jmcO4IQgEHUC2f3xO4VrTr6WitgjQ4hRB-BdJ1VQR3bjHGCkpjJlwjn956YZwowwrsc3Ug94ybUuoYkMRagXSEZ4DC8V2ps3vVax8whO577Gs46RmU4ZjIFIxsDYik3loJP3ge_xrQJF32hFmaVLiCZaX9UL5HArv9_GSZ5LRBad8sxd7qM63cGI48YxIHN6F4w0")'></div>
+<div class="flex items-center justify-center w-10 h-10 text-xs font-medium text-white bg-slate-700 border-2 border-white dark:border-[#1f1616] rounded-full hover:bg-slate-600 dark:hover:bg-slate-600">+2</div>
+</div>
+<div class="flex flex-col">
+<span class="text-slate-900 dark:text-white text-sm font-medium">5 friends</span>
+<span class="text-slate-500 dark:text-[#b89d9f] text-xs">want to watch this</span>
+</div>
+</div>
+<!-- Individual Status -->
+<div class="space-y-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="relative">
+<div class="size-8 rounded-full bg-cover" data-alt="Sarah's avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAytxlMG1PgbhS4IWOHeyE05H0SG3mPMFvpN_kOz28Rglp4ChJxWo7ONET4tjOY-WyI8xMkpoNTjNcBHVOKVJksdRj1oERfk-xJ9LrxYtQSIFzlmYffIajrb6Gcj529guXtivliKyddJdDat8wTdHvk2EJBAs1VVgYwBwcyUrGC-338pSJm4DuFgvwtZ8uI5rzIlbGs2naW-7YooALc_CY2XgI8Lgskdhe1FzA4FqCHA0WVnTiFmQ_A54RWwmRNq1YsmxVnjQzImks")'></div>
+<div class="absolute bottom-0 right-0 size-2.5 bg-green-500 rounded-full border border-white dark:border-[#1f1616]"></div>
+</div>
+<div class="flex flex-col">
+<span class="text-slate-900 dark:text-white text-sm font-medium">Sarah M.</span>
+<span class="text-green-500 text-xs font-medium">Online Now</span>
+</div>
+</div>
+<button class="size-8 flex items-center justify-center rounded-full bg-primary/10 text-primary hover:bg-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-sm">send</span>
+</button>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="relative">
+<div class="size-8 rounded-full bg-cover" data-alt="Mike's avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBhCfzPznhUiUxuK_AnqiaxyZreJReAOv_T_XqF0GAPzl8n2v_7BCiCf53ByDfCtKCVMR5ttQ65-C6poUjbxwgZmGjepbw-VxVbAMFdqYAkohW-0yjTlhRyop7BrB4QbRVUFHqetEvVWhrHGmHvU-LucC-ZxSq__acCggywN6tHED_iaLls5J01dF3EXat3xXa-_0HKL3IT8LR7Nh9CAeQv185jjrWHv32MaFk6wB4dL224z4mzQbu8NIMdFACb1TtKkVTZ1ORPmUc")'></div>
+</div>
+<div class="flex flex-col">
+<span class="text-slate-900 dark:text-white text-sm font-medium">Mike R.</span>
+<span class="text-slate-500 dark:text-[#b89d9f] text-xs">Rated it 5/5</span>
+</div>
+</div>
+<div class="flex text-yellow-500 gap-0.5">
+<span class="material-symbols-outlined text-sm fill-current">star</span>
+<span class="text-slate-900 dark:text-white text-xs font-bold pt-0.5">5.0</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Cast Section -->
+<div class="mt-12">
+<h3 class="text-slate-900 dark:text-white text-xl font-bold mb-6 flex items-center gap-2">
+                    Top Cast
+                    <span class="text-sm font-normal text-slate-500 dark:text-slate-400 cursor-pointer hover:text-primary ml-auto">View all</span>
+</h3>
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+<!-- Cast Member 1 -->
+<div class="flex flex-col items-center text-center group cursor-pointer">
+<div class="size-24 rounded-full overflow-hidden mb-3 border-2 border-transparent group-hover:border-primary transition-all shadow-lg" data-alt="Matthew McConaughey" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDwvf15EyiSP5_xkQO8nW1PQGQKLHwuuCiKoAaZnVPusv3suwZXI5LOgzfM8xtmEPhf3D5M8eHyGQdhdFZ9SVk-PkrJdN1v9jmZYIXLtZZ5cDRjwCNWyRg61YRT33tIT08O9Axytq4wZzJgv87jBgNhlirvuowEjNl2t9u0Kv-taPqFjzrCr3fzYAqKLpMu6bJKdFeRM5SCBG_3qPAXzaI4JIvCCkJZzojWR49XWKTNWyATdvkQGMlVylPrNgWG4jfvs5gTisiX5zc"); background-size: cover; background-position: center;'></div>
+<h4 class="text-slate-900 dark:text-white font-medium text-sm">Matthew McC...</h4>
+<p class="text-slate-500 dark:text-[#b89d9f] text-xs">Cooper</p>
+</div>
+<!-- Cast Member 2 -->
+<div class="flex flex-col items-center text-center group cursor-pointer">
+<div class="size-24 rounded-full overflow-hidden mb-3 border-2 border-transparent group-hover:border-primary transition-all shadow-lg" data-alt="Anne Hathaway" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCTzN5fSxwHhxl7x6x1pLp1tPoYQ9JV8D287FG4BAITyMxjBZKFC1e_RM3tkr6PWDhLix-zDdFzwPfYKf1xNl05a54Yz_rjoPPm4gYmrv1u4TTRgW2E5k8LtVIg_t-MjeC8_4rcxFLjL-rr-zwvwzLbepxrXfs92XLekz6fkj6IicKHn1WLPW2l2m8w8MturlIt0kiKx7LXeVV0rvAxQO2wwN-Oa3bLU_S7EsG_te8r00LuwkNUQk6xvbpmjMqvduYhA08zn14UVyc"); background-size: cover; background-position: center;'></div>
+<h4 class="text-slate-900 dark:text-white font-medium text-sm">Anne Hathaway</h4>
+<p class="text-slate-500 dark:text-[#b89d9f] text-xs">Brand</p>
+</div>
+<!-- Cast Member 3 -->
+<div class="flex flex-col items-center text-center group cursor-pointer">
+<div class="size-24 rounded-full overflow-hidden mb-3 border-2 border-transparent group-hover:border-primary transition-all shadow-lg" data-alt="Jessica Chastain" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB_3qCp1aADH5inCWDiJQabObG789itoq6CjQYBbDR41-2FgjeVY3zMSwjmCM5Fxw8EMFr3M63AtkahrQPjoy7fosfSSxezz1zbKrFFQ6_pt-uLM3ehWbMjX5RYHtnEAVRbDl_wmMCiONhuBPhdNWAXMYqqN6LtvxoFw_NqGmFUHABvxMuTr_ahLsjgiiwxs9d9_tNwMvYztA4cJ12YHrGudJwU0nvqpNnC-xDTbo62we7JSxwL121-OCc0G9XOPL9rphuqjh2lUUA"); background-size: cover; background-position: center;'></div>
+<h4 class="text-slate-900 dark:text-white font-medium text-sm">Jessica Chastain</h4>
+<p class="text-slate-500 dark:text-[#b89d9f] text-xs">Murph</p>
+</div>
+<!-- Cast Member 4 -->
+<div class="flex flex-col items-center text-center group cursor-pointer">
+<div class="size-24 rounded-full overflow-hidden mb-3 border-2 border-transparent group-hover:border-primary transition-all shadow-lg" data-alt="Michael Caine" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAkCUWA2es1o5FOg91YLt4AMIDplUwIY1cBvOXCzWFVU3fsYVR9phfpCinE3rx8677YIHaJ0YyDoIKShD1jcenJx5WhVda4ax1w8ByLgO8ut_1hpdbza1jJuMantujNKTrs53uvG7Liw-1xp8LaBjyFgzVWUJs-qX5AemmkbGjopL6dUXF1weSRz_KjYr1ppZMAmR2C3sUn8WWwsflk-VOeIPoHxrtMWRSQowdVAX_teGevS7b_dsmkK_M7epQtQpRkt2Xb3Ck6Mss"); background-size: cover; background-position: center;'></div>
+<h4 class="text-slate-900 dark:text-white font-medium text-sm">Michael Caine</h4>
+<p class="text-slate-500 dark:text-[#b89d9f] text-xs">Prof. Brand</p>
+</div>
+<!-- Cast Member 5 -->
+<div class="flex flex-col items-center text-center group cursor-pointer">
+<div class="size-24 rounded-full overflow-hidden mb-3 border-2 border-transparent group-hover:border-primary transition-all shadow-lg" data-alt="Matt Damon" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCVq1dyoysPEv3PdmtLb58DaQfUCZU0SezbtoJIJwjCgPkxCfraNae8dXd5_-VVklbs3H1KVZCrNRKircoVbpQsxzDavj2RAOMmFY6zdabcIIwc3k9OXHXdaBQAiw_-dkdj7MvTP2-cAMoBPfDAtJ6FddXSaRJ2iG5voe-9aOdze-oc3paVG6sSusdwZqyZ4Cn_1o1vMlJwjuFmPPdOF0mpWt2LsPuQhPS9vk2k2UuS20YoUtuL_3pc8VQuwbyYXmAlDXTjp1n3FF4"); background-size: cover; background-position: center;'></div>
+<h4 class="text-slate-900 dark:text-white font-medium text-sm">Matt Damon</h4>
+<p class="text-slate-500 dark:text-[#b89d9f] text-xs">Mann</p>
+</div>
+<!-- Cast Member 6 -->
+<div class="flex flex-col items-center text-center group cursor-pointer">
+<div class="size-24 rounded-full overflow-hidden mb-3 border-2 border-transparent group-hover:border-primary transition-all shadow-lg" data-alt="Mackenzie Foy" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBut_Xq51da5P9ySrC7SbXWxdEcO-zBfAd_jLnZoj9Ehk9luTpHTQ1hJhMSXeTOJDO2S9pBGn7J1OWHE9MnIBYrUMGQHvm19C32UHDWM9_rDMYtUekBO23P-4z7YSR5OpiWkTUYDc5DNZH8E7oRw9Nlg3M5eR9P2bR4dlnmjaxmS24OIQeu9GbOR01PGN-KBcR-0Ou_fayM_pjlO5_SLekJnidD1I1pShtdjPOdSDl6W5cI7NYdKYi8VEplQkEEQcYAE8vEK7TK7Xw"); background-size: cover; background-position: center;'></div>
+<h4 class="text-slate-900 dark:text-white font-medium text-sm">Mackenzie Foy</h4>
+<p class="text-slate-500 dark:text-[#b89d9f] text-xs">Young Murph</p>
+</div>
+</div>
+</div>
+<!-- Group Watch & Reviews Split -->
+<div class="mt-16 grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Recent Friend Reviews -->
+<div class="lg:col-span-2">
+<h3 class="text-slate-900 dark:text-white text-xl font-bold mb-6">Friend Reviews</h3>
+<div class="flex flex-col gap-4">
+<!-- Review 1 -->
+<div class="bg-white dark:bg-[#1f1616] p-6 rounded-xl border border-slate-200 dark:border-[#382929]">
+<div class="flex justify-between items-start mb-3">
+<div class="flex gap-3 items-center">
+<div class="size-10 rounded-full bg-cover" data-alt="Reviewer avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA1RSR_sv3cx6TgusTp8kDcM3LDmaVP0_kYsOtcnrZunPtL2kkc__4FLDLd1uJoIE_sgwsPe6ANM_CLoWhuQi8pvUI6rI9wB3LpMlmaQVZVxShOAEGOJ-26DV8yBEeX2Kpk77UxahvtJ3uajB0mVLMcTSRM7eLnR_2E6-q_t6aN-Pgw51MTFTf8gCQfl4Sdz95_Qi-J2JL9D8wK8AU3gflCX4sMq5WU2bXfIHCq_RpXhOSz1jfA7r1RIxAzLldcKu3eNHaNsEd8Ymc")'></div>
+<div>
+<h4 class="text-slate-900 dark:text-white text-sm font-bold">James Wilson</h4>
+<p class="text-slate-500 dark:text-[#b89d9f] text-xs">Watched 2 days ago</p>
+</div>
+</div>
+<div class="flex text-yellow-500">
+<span class="material-symbols-outlined text-lg fill-current">star</span>
+<span class="material-symbols-outlined text-lg fill-current">star</span>
+<span class="material-symbols-outlined text-lg fill-current">star</span>
+<span class="material-symbols-outlined text-lg fill-current">star</span>
+<span class="material-symbols-outlined text-lg fill-current">star_half</span>
+</div>
+</div>
+<p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed">
+                                Absolutely mind-blowing visuals. Hans Zimmer's score is a masterpiece on its own. We should definitely do a re-watch group session soon!
+                            </p>
+<div class="mt-4 flex gap-4">
+<button class="flex items-center gap-1.5 text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors text-xs font-medium">
+<span class="material-symbols-outlined text-base">thumb_up</span>
+                                    Helpful (12)
+                                </button>
+<button class="flex items-center gap-1.5 text-slate-500 dark:text-slate-400 hover:text-white transition-colors text-xs font-medium">
+<span class="material-symbols-outlined text-base">chat_bubble</span>
+                                    Reply
+                                </button>
+</div>
+</div>
+<!-- Review 2 -->
+<div class="bg-white dark:bg-[#1f1616] p-6 rounded-xl border border-slate-200 dark:border-[#382929]">
+<div class="flex justify-between items-start mb-3">
+<div class="flex gap-3 items-center">
+<div class="size-10 rounded-full bg-cover" data-alt="Reviewer avatar 2" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB95hiCYL1wG5fBIuhLt8Z_MhuoLZGxYmGeDOPShUHkpP3PO9oadSNfn1loUFIxh3JJhX0PXntuT-VEu_UG-s5mJTJTCeS3KTumLC_D4va2b9gcihX3VfXy_j9aapRgS_YK2Irvtg7z6V-RX3C_-3HOKx2NklTqPqv3Eg6v52fsPOizoGl6h2Lx1j4WqfmJ0FqnShP1_QwZreHqmGpfWkIm0LPqmHLGZAAv7jn90qQEYEhfgcDjxI7vXyFD_E0S1pAQa0SDeNLVv5o")'></div>
+<div>
+<h4 class="text-slate-900 dark:text-white text-sm font-bold">Elena Rodriguez</h4>
+<p class="text-slate-500 dark:text-[#b89d9f] text-xs">Watched last week</p>
+</div>
+</div>
+<div class="flex text-yellow-500">
+<span class="material-symbols-outlined text-lg fill-current">star</span>
+<span class="material-symbols-outlined text-lg fill-current">star</span>
+<span class="material-symbols-outlined text-lg fill-current">star</span>
+<span class="material-symbols-outlined text-lg fill-current">star</span>
+<span class="material-symbols-outlined text-lg fill-current text-slate-600">star</span>
+</div>
+</div>
+<p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed">
+                                The emotional core of this movie gets me every time. "Because my dad promised me." 😭
+                            </p>
+</div>
+</div>
+</div>
+<!-- Similar Titles (Group Favorites) -->
+<div class="lg:col-span-1">
+<h3 class="text-slate-900 dark:text-white text-xl font-bold mb-6">Group Favorites</h3>
+<div class="flex flex-col gap-4">
+<!-- Rec 1 -->
+<div class="group flex gap-3 cursor-pointer p-2 hover:bg-slate-100 dark:hover:bg-[#2d1b1b] rounded-lg transition-colors">
+<div class="w-24 h-16 rounded bg-cover bg-center shrink-0" data-alt="Inception movie poster" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDHkD7J36TIiijLgoLk8Cf2fzdtXB2ZNzwyiS8qX9qlkoWC6qB5UlQ_MyRaSRhhM-kDvqkEh21JUUAqVoeGpINhkRKuzyW8HYlviNnzZk2zgG0bBcmMiscfDbwL492bwC5kPoJ7WdpGzkSwL7oaHM2lD91b3qwNdi5HXhvRwZ2DoPHsBPcfta7R-wDEfgh4EFgKyt3i3BMK0gwQkHItggQeTTpRUH9UTw5zbO0gPnQa-fDLVTcO2mXKDY6jtWjLiwV3h0kTgr1h6Z4")'></div>
+<div class="flex flex-col justify-center">
+<h4 class="text-slate-900 dark:text-white text-sm font-bold group-hover:text-primary transition-colors">Inception</h4>
+<div class="flex items-center gap-2 text-xs text-slate-500 dark:text-[#b89d9f] mt-1">
+<span>2010</span>
+<span class="text-primary">• 98% Match</span>
+</div>
+</div>
+</div>
+<!-- Rec 2 -->
+<div class="group flex gap-3 cursor-pointer p-2 hover:bg-slate-100 dark:hover:bg-[#2d1b1b] rounded-lg transition-colors">
+<div class="w-24 h-16 rounded bg-cover bg-center shrink-0" data-alt="The Martian movie poster" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA9mExilwUamm_MgQjGvZ3GFOx6lBF53dZqgkSippS4a0FwxWLadGb246bsoygyED8PmdBWPYiZuXIR7lKfopWh1Tk_8PTgT3_620jyxsI0ZEyB9FuuiB5tW4w4T24QQJegxa7TlqCJwt_2xlarqrNKD7FR12f5qXhh5nBtpT38dIMu3R-131QduIbbyJIu6dOwLcKKxlM8iaVx9HrRzWq3vBZNiueUmPrTQOne7DxNqymuhaQXS921MMKr0R2m1I11OMtIehruoCk")'></div>
+<div class="flex flex-col justify-center">
+<h4 class="text-slate-900 dark:text-white text-sm font-bold group-hover:text-primary transition-colors">The Martian</h4>
+<div class="flex items-center gap-2 text-xs text-slate-500 dark:text-[#b89d9f] mt-1">
+<span>2015</span>
+<span class="text-primary">• 85% Match</span>
+</div>
+</div>
+</div>
+<!-- Rec 3 -->
+<div class="group flex gap-3 cursor-pointer p-2 hover:bg-slate-100 dark:hover:bg-[#2d1b1b] rounded-lg transition-colors">
+<div class="w-24 h-16 rounded bg-cover bg-center shrink-0" data-alt="Arrival movie poster abstract" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBntXRvV5uL0FEmJoXZPYOHIA-3mK-bTnLngaWiM2hB-Mevkt9iYWMyd1SaZ7cA8nqzatG0zvObCVOJe3ghdS6zQ6ka-kpl9HBUiLSpt88uzLDBxwbPswzL2ZH_MivThwj89D9ve6mdB130sMTjnjUMge0SAC4yGBG0kG0ww2cnodFFLvUZDxgr77NuYv0UMbVERMgMNiGkrrt2GkokOnsr0t5Mtmx4CMR8vnwzBvMOdXlocuFyZbMG4b2XGm5e4qjnQp54E2yMIYg")'></div>
+<div class="flex flex-col justify-center">
+<h4 class="text-slate-900 dark:text-white text-sm font-bold group-hover:text-primary transition-colors">Arrival</h4>
+<div class="flex items-center gap-2 text-xs text-slate-500 dark:text-[#b89d9f] mt-1">
+<span>2016</span>
+<span class="text-primary">• 91% Match</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>
+
+
+
+

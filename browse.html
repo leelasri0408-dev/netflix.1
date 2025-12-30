@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GroupStream - Browse</title>
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ea2a33",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#121212", 
+                        "surface-dark": "#1e1e1e",
+                        "surface-light": "#ffffff",
+                    },
+                    fontFamily: {
+                        "display": ["Spline Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem", 
+                        "lg": "0.5rem", 
+                        "xl": "0.75rem", 
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white antialiased">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<!-- TopNavBar -->
+<header class="sticky top-0 z-50 w-full border-b border-solid border-slate-200 dark:border-[#2a2a2a] bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-md px-4 lg:px-10 py-3">
+<div class="layout-container flex h-full items-center justify-between">
+<div class="flex items-center gap-4 text-slate-900 dark:text-white">
+<div class="size-8 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl">movie_filter</span>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-[-0.015em] hidden sm:block">GroupStream</h2>
+</div>
+<nav class="hidden md:flex flex-1 justify-center gap-8">
+<a class="text-sm font-medium leading-normal text-slate-500 hover:text-primary dark:text-slate-400 dark:hover:text-white transition-colors" href="home.html">Home</a>
+<a class="text-sm font-medium leading-normal text-primary font-bold" href="browse.html">Browse</a>
+<a class="text-sm font-medium leading-normal text-slate-500 hover:text-primary dark:text-slate-400 dark:hover:text-white transition-colors" href="groups.html">My Groups</a>
+<a class="text-sm font-medium leading-normal text-slate-500 hover:text-primary dark:text-slate-400 dark:hover:text-white transition-colors" href="profile.html">Queue</a>
+</nav>
+<div class="flex items-center justify-end gap-4">
+<button class="flex items-center justify-center rounded-full size-10 hover:bg-slate-200 dark:hover:bg-[#2a2a2a] text-slate-900 dark:text-white transition-colors">
+<span class="material-symbols-outlined">search</span>
+</button>
+<button class="relative flex items-center justify-center rounded-full size-10 hover:bg-slate-200 dark:hover:bg-[#2a2a2a] text-slate-900 dark:text-white transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-primary rounded-full border border-background-dark"></span>
+</button>
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-10 ring-2 ring-slate-200 dark:ring-[#2a2a2a]" data-alt="User profile avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDlZBclUQgZuR_RT-RpELF5QuHXHpmRP7oLd3Ny4z98rxq5WZV4o7HWTSzGvbN8GRdI4qgmTaLNtjPXHUT7pocMxmnLHMIyH1CW09gIIUTSeg_eyoa-sucfz-Q8qEPNOFaNNYbqnBfhj-b6lHWvORDX2KZ1Z8YdUyyDvB2oR8NTW7u0XXz-sSuG7d2-TQgkb4ny3pfDeyRkZVQvefj58Hat0no8GIjwW1ipun4uUHRGLJtgzWcRcWle_fbK09cl4d-hU4gteO9ph4Y");'></div>
+</div>
+</div>
+</header>
+<main class="flex-1 flex flex-col items-center w-full">
+<div class="w-full max-w-[1400px] px-4 md:px-8 lg:px-12 py-6 flex flex-col gap-8">
+<!-- HeroSection -->
+<div class="@container w-full">
+<div class="relative w-full overflow-hidden rounded-2xl min-h-[500px] flex flex-col justify-end p-6 md:p-12" data-alt="Cinematic shot of a desert landscape from a sci-fi movie" style='background-size: cover; background-position: center; background-image: linear-gradient(to top, rgba(18,18,18,1) 0%, rgba(18,18,18,0.6) 50%, rgba(18,18,18,0.2) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuCG-Oq-6fyWhrDIPFAUFfLUEG-UMH1x_2myujZI65Cc5KghmYPzG0VFkioeZ1X-fuQQqFxN5QH5P9D7H3eV2GFI_af_XYnrGKg0C609nq49ayNlwHbG5EWtc4rAovL77YhiroEfjSK1542g2ZgTnN__96Tx7YDuqW8v7qX7MYhxNvAP9y74QlLqqeehHMLQpoKQm64HvK9CDzwgBQijG25QdacPrKeLB9z__X2pQlaBa1A_J_hDwWf6DULKaXuixS_R4aTrvgIooBQ");'>
+<div class="flex flex-col gap-4 text-left max-w-3xl animate-fade-in-up">
+<div class="flex items-center gap-2 mb-2">
+<span class="bg-primary text-white text-xs font-bold px-2 py-1 rounded">TRENDING IN YOUR GROUP</span>
+<span class="text-slate-300 text-xs font-medium border border-slate-500 px-2 py-1 rounded">SCI-FI</span>
+<span class="text-slate-300 text-xs font-medium">2024</span>
+</div>
+<h1 class="text-white text-4xl md:text-6xl font-black leading-tight tracking-[-0.033em]">
+                           Dune: Part Two
+                        </h1>
+<p class="text-slate-300 text-base md:text-lg font-normal leading-relaxed line-clamp-2 md:line-clamp-none max-w-2xl">
+                          Paul Atreides unites with Chani and the Fremen while on a warpath of revenge against the conspirators who destroyed his family.
+                        </p>
+<div class="flex flex-wrap gap-4 mt-4">
+<button class="flex items-center gap-2 h-12 px-6 bg-primary hover:bg-primary/90 text-white text-base font-bold rounded-lg transition-all transform active:scale-95 shadow-lg shadow-primary/30">
+<span class="material-symbols-outlined">play_circle</span>
+<span>Watch Party</span>
+</button>
+<button class="flex items-center gap-2 h-12 px-6 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white text-base font-bold rounded-lg transition-all border border-white/10">
+<span class="material-symbols-outlined">how_to_vote</span>
+<span>Add to Vote</span>
+</button>
+<button class="flex items-center justify-center size-12 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-colors border border-white/10">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+<!-- Social Proof -->
+<div class="flex items-center gap-3 mt-2">
+<div class="flex -space-x-2">
+<img alt="Friend 1" class="size-8 rounded-full border-2 border-background-dark object-cover" data-alt="Portrait of a young man" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYNh_xVEiqY8xP519AJ3ZmLZLPPGweyz1wV3t3KSSydeABr73DTUaG66sSymCjh0EBTyw1rgiLnqTGr9P7F1zd4vXo2Vawr3jlopCs_8DFVnCUQSo0Ss3EG5ZFQyhDUbhvmJ9XwV2M7POLdtuAhnvfgnCz7CKlyCzFGfeLDRs70dB-d-bxVczdkgMmBP10LtgooXD1xmK5oC-ulKVzACgoy_I2PF0_ww4rx2v7_Kd0H4Yhp94Rr3hExHgi1C7aeCyI_sw_ZQPwULw"/>
+<img alt="Friend 2" class="size-8 rounded-full border-2 border-background-dark object-cover" data-alt="Portrait of a smiling woman" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqsVxQQN3cRAVysQukegBhQ-ZLxQu-FAs19xFVH5Kf5Je9pZipRgsxe3WV6KF534nQemaiBEV5mH0N2hTUzAWMKqPoClA3QjZMrxJtZ2aWHspNMD19ApGsvlr4UiI2hT0EY5hHS8yLjYqfjTAPHoLp7VsgqMoaKw5v8mLb63v2_6Bfe-JLgV9VgMVtLlP9T6Flr9Ou3ZMU78Ill_JRPBTpd223bCuNQlluP9-KyNMWdZTBiqnAnsJ8zzhSvDhnlEBu8-OhImPx0oQ"/>
+<img alt="Friend 3" class="size-8 rounded-full border-2 border-background-dark object-cover" data-alt="Portrait of a man with glasses" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPnN3EqWJ2dBSJitfyHbwBcEGBfDjxbrkIMucF3gmDh_rLcLkACA18aYKak7LyaZOxukkOsqoGMAeqyU4cbIcCHC_NkBcS_2ilZm4rDNKQpjiN9kECTJoYpGRdMZjwnefuwgLEs5RpEy-0RW6bYnQ6WkdSPzfxjvRDXL4ZHZjQZTTS5A6t27QXF4GAe18omhDQnsjJ-5ZXJrv1ruYrRVe4iApX5W4FsEZDktWTrsz3j3Nf9Dvm-AVAagQRVHCHitHMP64ObWb5-BQ"/>
+</div>
+<p class="text-sm text-slate-400"><strong>Sarah</strong> and 2 others want to watch this</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Search and Filter Section -->
+<div class="flex flex-col gap-4">
+<!-- SearchBar -->
+<div class="relative w-full">
+<div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-slate-400">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="w-full bg-surface-dark border-none rounded-xl py-4 pl-12 pr-4 text-white placeholder-slate-500 focus:ring-2 focus:ring-primary focus:bg-[#252525] transition-all shadow-inner" placeholder="Search titles, genres, or people..." type="text"/>
+<div class="absolute inset-y-0 right-0 flex items-center pr-3">
+<button class="p-2 text-slate-400 hover:text-white transition-colors">
+<span class="material-symbols-outlined">tune</span>
+</button>
+</div>
+</div>
+<!-- Chips -->
+<div class="flex gap-3 overflow-x-auto no-scrollbar pb-2 mask-linear-fade">
+<button class="flex h-9 shrink-0 items-center justify-center px-4 rounded-full bg-primary text-white text-sm font-semibold shadow-lg shadow-primary/20">
+                        All
+                    </button>
+<button class="flex h-9 shrink-0 items-center justify-center px-4 rounded-full bg-surface-dark hover:bg-[#2a2a2a] text-slate-300 hover:text-white text-sm font-medium border border-white/5 transition-all">
+                        Movies
+                    </button>
+<button class="flex h-9 shrink-0 items-center justify-center px-4 rounded-full bg-surface-dark hover:bg-[#2a2a2a] text-slate-300 hover:text-white text-sm font-medium border border-white/5 transition-all">
+                        TV Shows
+                    </button>
+<button class="flex h-9 shrink-0 items-center justify-center px-4 rounded-full bg-surface-dark hover:bg-[#2a2a2a] text-slate-300 hover:text-white text-sm font-medium border border-white/5 transition-all gap-2">
+<span class="material-symbols-outlined text-base">local_fire_department</span>
+                        New Releases
+                    </button>
+<button class="flex h-9 shrink-0 items-center justify-center px-4 rounded-full bg-surface-dark hover:bg-[#2a2a2a] text-slate-300 hover:text-white text-sm font-medium border border-white/5 transition-all gap-2">
+<span class="material-symbols-outlined text-base">group</span>
+                        Good for Groups
+                    </button>
+<button class="flex h-9 shrink-0 items-center justify-center px-4 rounded-full bg-surface-dark hover:bg-[#2a2a2a] text-slate-300 hover:text-white text-sm font-medium border border-white/5 transition-all gap-2">
+<span class="material-symbols-outlined text-base">campaign</span>
+                        Debate-Worthy
+                    </button>
+<button class="flex h-9 shrink-0 items-center justify-center px-4 rounded-full bg-surface-dark hover:bg-[#2a2a2a] text-slate-300 hover:text-white text-sm font-medium border border-white/5 transition-all gap-2">
+<span class="material-symbols-outlined text-base">timer</span>
+                        Under 90m
+                    </button>
+</div>
+</div>
+<!-- Content Rail 1: Good for a Movie Night -->
+<section class="flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<h2 class="text-white text-2xl font-bold leading-tight flex items-center gap-2">
+                        Good for a Movie Night
+                        <span class="material-symbols-outlined text-primary">nightlight</span>
+</h2>
+<a class="text-sm font-medium text-primary hover:text-primary/80" href="browse.html">View all</a>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+<!-- Card 1 -->
+<div class="group relative flex flex-col gap-2 cursor-pointer">
+<div class="relative aspect-[2/3] w-full overflow-hidden rounded-lg bg-surface-dark">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Poster for Interstellar showing space" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDQ3RVRPjP-tyGgDneqk8oeP-c1EpQ01eddcYcjVsG_Wv9TXD0M4OaLCsd6sYw0Tp9ujS76pkhsSXbLtwoSjKmPpCRmGiH2PFzy-yLvsV42C2mQxyZE2cCNEAjyUvZGuoG0hwee58EFMWpik45fx0_vBtFNlytZMd5q1sprTseDT2yfqsxJ_h_kuUsK_UA4RinIR8g4dDdKSTSx-1ANQWC9LlYdQRyIFy8-g23y73yF9WUE8ivOhxTQCAhCQGd5ikO9Bde1QhSYjqo");'></div>
+<div class="absolute inset-0 bg-black/80 opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex flex-col items-center justify-center gap-3 p-4">
+<div class="flex gap-2">
+<button class="size-10 flex items-center justify-center bg-primary text-white rounded-full hover:scale-110 transition-transform"><span class="material-symbols-outlined">play_arrow</span></button>
+<button class="size-10 flex items-center justify-center bg-white/20 text-white rounded-full hover:bg-white/30 transition-colors"><span class="material-symbols-outlined">add</span></button>
+</div>
+<div class="text-center mt-2">
+<p class="text-green-400 font-bold text-sm">98% Match</p>
+<p class="text-slate-300 text-xs mt-1">Sci-Fi • 2h 49m</p>
+</div>
+</div>
+<div class="absolute top-2 right-2 bg-black/60 backdrop-blur-md px-1.5 py-0.5 rounded text-xs font-bold text-white flex items-center gap-1">
+<span class="material-symbols-outlined text-yellow-400 text-xs">star</span> 8.7
+                            </div>
+</div>
+<div class="flex flex-col">
+<h3 class="text-white text-sm font-semibold truncate group-hover:text-primary transition-colors">Interstellar</h3>
+<div class="flex items-center justify-between mt-1">
+<span class="text-xs text-slate-500">2014</span>
+<div class="flex -space-x-1.5">
+<img alt="User" class="size-4 rounded-full border border-background-dark" data-alt="Small user avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgFhaItI2Ry-qD_l30-0FVM1oCEPZ8aiZBubuM91UDczoAdbygJE4EQdHG6KPfGnjM9hh0DKMiMvrONMlKGc-B_NHCG-yKDSjcSQjDl8Y84qPsLKUpixp_KAR-45ZViaVPfhK8ObiiAUps6Kot3SmScdQWGD-GcXfimlc3Y9v39o9a-LM_NrCVAcohNQOYRsVuazhmfkrjXcyat2QDPksIkYvhaLA2BT7HWB98u4V0_Rm9B9q2djn2XezT_Ti6EHs36VqSAF-x0o0"/>
+<img alt="User" class="size-4 rounded-full border border-background-dark" data-alt="Small user avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbacuBrkijtd9dU4e2krVd4h6ZEzSy23pyie5G8jwYvhlANUdEHjxDW3BRNDclyqqHMyMpVML23gyPM7R_Y1n8KpQPw0NWrZxDFyIEy2mZ4ioiSF6lXFvR2eyqXsH-im0JQPts2dL66nutCi3r4QR3hKmN3Ce6o31g8KZpdMfFxXhA_OrwSiYK3scns2hmFa6tYJzGzZwtPpltgPR6DnkaT_WwvPTlN1AyCxD-ngYeb9vTN85nG50gvCeElirrEM8GRU4NYpCTMkA"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group relative flex flex-col gap-2 cursor-pointer">
+<div class="relative aspect-[2/3] w-full overflow-hidden rounded-lg bg-surface-dark">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Abstract colorful poster representing a comedy movie" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBlCV6DwQv0WY9GOWN_ANln3EM1pJfiDKE76AK7021EZ00ESfAv6J0SrHuu5oCWx-loo_4MKxkdvSROrV85wQgYhB-dkrtUafOdpXvym-4_k0hZRNuH5ehNk9tNFXUqSzvt4_W2Tp9cHeNffzgWZE2V0yDLP5LZ83XC2-YCes7Dr-vES83ljV20ga9MA94gTycdxj-z49gAB5MdjgttpOgpx07EqH5gQUHDWN3u2gFB-bSCxBgy8WCaRQfRnXQwJHH7DMu69KTukHo");'></div>
+<div class="absolute inset-0 bg-black/80 opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex flex-col items-center justify-center gap-3 p-4">
+<div class="flex gap-2">
+<button class="size-10 flex items-center justify-center bg-primary text-white rounded-full hover:scale-110 transition-transform"><span class="material-symbols-outlined">play_arrow</span></button>
+<button class="size-10 flex items-center justify-center bg-white/20 text-white rounded-full hover:bg-white/30 transition-colors"><span class="material-symbols-outlined">add</span></button>
+</div>
+<div class="text-center mt-2">
+<p class="text-green-400 font-bold text-sm">92% Match</p>
+<p class="text-slate-300 text-xs mt-1">Comedy • 1h 52m</p>
+</div>
+</div>
+</div>
+<div class="flex flex-col">
+<h3 class="text-white text-sm font-semibold truncate group-hover:text-primary transition-colors">The Grand Hotel</h3>
+<div class="flex items-center justify-between mt-1">
+<span class="text-xs text-slate-500">2014</span>
+<span class="text-xs text-slate-500">PG-13</span>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group relative flex flex-col gap-2 cursor-pointer">
+<div class="relative aspect-[2/3] w-full overflow-hidden rounded-lg bg-surface-dark">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Dark moody poster for a thriller movie" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAaHXXVRpFi3GfVHGnJkJG6OgJwCGwWpK36oMRssGYo8IgcQP0qR2udCIBXt0k5dWO7jwtK2BoQWf2GLmCvTDjtVUj8yfbYEmsKhFiq1YpsTSiX8hTAmaEFlAVNXysSLxtjK87h3wskeIpDXKtRFiBZ01Rszd1qXobgzTw3x9Be4XHlNAyEZgGXz72FGmQP1mPa60NI7j3tNgsZH-K8ZGFRcUA_ON0C1psy97SxnHo_A9Xw3uuIVIQLaZMKTSY-wFz9vpuhFr8rIa8");'></div>
+<div class="absolute inset-0 bg-black/80 opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex flex-col items-center justify-center gap-3 p-4">
+<div class="flex gap-2">
+<button class="size-10 flex items-center justify-center bg-primary text-white rounded-full hover:scale-110 transition-transform"><span class="material-symbols-outlined">play_arrow</span></button>
+<button class="size-10 flex items-center justify-center bg-white/20 text-white rounded-full hover:bg-white/30 transition-colors"><span class="material-symbols-outlined">add</span></button>
+</div>
+<div class="text-center mt-2">
+<p class="text-green-400 font-bold text-sm">85% Match</p>
+<p class="text-slate-300 text-xs mt-1">Thriller • 2h 10m</p>
+</div>
+</div>
+</div>
+<div class="flex flex-col">
+<h3 class="text-white text-sm font-semibold truncate group-hover:text-primary transition-colors">Midnight Mass</h3>
+<div class="flex items-center justify-between mt-1">
+<span class="text-xs text-slate-500">2021</span>
+<div class="flex -space-x-1.5">
+<img alt="User" class="size-4 rounded-full border border-background-dark" data-alt="Small user avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAt3cFAD4IgSue3BZGd4wsLvF6MGwe52SH8mjXkVyZAaymDF0ikowKVO0FbyKytsGhwjDKWiPnZ-i1S1Ca0itaeIsXSwSM2TkfOVkQjfFBSo6oBOy5BPEmhw42AumHz346aogerCMY3Ol0v-1ciFUxMv3P0Varv27bqc_0NUOoNFljutpkSf5q64PXm7v3nJqMSlB3ShFskTc6hd4EyUrxXVB20TJXudMY5YSkgllc9onvIliE6HU939dRAYs4XOUjLA832H15Sb9g"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="group relative flex flex-col gap-2 cursor-pointer">
+<div class="relative aspect-[2/3] w-full overflow-hidden rounded-lg bg-surface-dark">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Bright colorful poster for animation" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuChtxYqMPPKb-I2Hb8NziazlGe2mCc4P5zl0kAtbW-uveIJhcmx76nkZm9a0be74_lcEkKE_Rw4r4RXMpfC4fuVZblwtbtttRMoXjf10L8P4UVKivVCizR3aoFpVxaeCnBdpBDn-HPIF7zrOeQJHS0KiIu0qkB0n6dajGRSBaugspKK9JQb-1iuRGz6OOt7voCk9DZ9dr-1SwV_G1GG2efLwy_LNBxF1yqtrGQmFfKfM_rKlzmQ-_gqdZ2zoIIese0cVtTm65wGBf0");'></div>
+<div class="absolute inset-0 bg-black/80 opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex flex-col items-center justify-center gap-3 p-4">
+<div class="flex gap-2">
+<button class="size-10 flex items-center justify-center bg-primary text-white rounded-full hover:scale-110 transition-transform"><span class="material-symbols-outlined">play_arrow</span></button>
+<button class="size-10 flex items-center justify-center bg-white/20 text-white rounded-full hover:bg-white/30 transition-colors"><span class="material-symbols-outlined">add</span></button>
+</div>
+</div>
+<div class="absolute top-2 left-2 bg-primary px-1.5 py-0.5 rounded text-xs font-bold text-white">
+                                NEW
+                            </div>
+</div>
+<div class="flex flex-col">
+<h3 class="text-white text-sm font-semibold truncate group-hover:text-primary transition-colors">Neon Genesis</h3>
+<div class="flex items-center justify-between mt-1">
+<span class="text-xs text-slate-500">2023</span>
+<span class="text-xs text-slate-500">TV-MA</span>
+</div>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="group relative flex flex-col gap-2 cursor-pointer">
+<div class="relative aspect-[2/3] w-full overflow-hidden rounded-lg bg-surface-dark">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Poster with retro 80s aesthetic" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBVIVJWjgsjdwYI5fBZF1GvOsSTiV_QTO9mHSn-Di0QkKT7_XXjgFaT5pYjvJgZLAq3IuDfhxWPGb2xh_xbn2bmHGEyXr5RhNWx0tAqydVz_oe7jBb-am0_wvjRWIysrKXsM-stQoquaGfmZ0d1Tnk1jXMVAXMPE5TNhfeUGVriq54E3-VdDMkqe3E9kn6tHENjSg3iHmAs9eVa726M1hkIhxUonnoDG-zhsXLb5_zXj-iQIe_H2t3296Fz-tCppB-NeJFglFYy3mM");'></div>
+<div class="absolute inset-0 bg-black/80 opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex flex-col items-center justify-center gap-3 p-4">
+<div class="flex gap-2">
+<button class="size-10 flex items-center justify-center bg-primary text-white rounded-full hover:scale-110 transition-transform"><span class="material-symbols-outlined">play_arrow</span></button>
+<button class="size-10 flex items-center justify-center bg-white/20 text-white rounded-full hover:bg-white/30 transition-colors"><span class="material-symbols-outlined">add</span></button>
+</div>
+</div>
+</div>
+<div class="flex flex-col">
+<h3 class="text-white text-sm font-semibold truncate group-hover:text-primary transition-colors">Retro Wave</h3>
+<div class="flex items-center justify-between mt-1">
+<span class="text-xs text-slate-500">2022</span>
+<span class="text-xs text-slate-500">TV-14</span>
+</div>
+</div>
+</div>
+<!-- Card 6 -->
+<div class="group relative flex flex-col gap-2 cursor-pointer">
+<div class="relative aspect-[2/3] w-full overflow-hidden rounded-lg bg-surface-dark">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Action movie poster with explosions" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDR1_7-h50z64zFV447hioxZcQY70IWoZQ1p9gIoTKWn0ESh8YC2AyxAmPOrbmDWo6k6ndEKA4HxA-UOxHzUKqRdGi77kmbGe0o76uJVOVHfH_rQutkulKLYzxKcpyU_iDByrQXncr5nQWRhLVQFcxqLCfDFnqmMo3nvGV4wULTGIegp09INHF38hTQwFQ6ixNtRBcHWAMjh8ofM7TrPgJ0N5rSZnumZsXAiXlQ8HW6sHQ_h240BZ4TbcKbspTrwdkbwDrqaaD7lAw");'></div>
+<div class="absolute inset-0 bg-black/80 opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex flex-col items-center justify-center gap-3 p-4">
+<div class="flex gap-2">
+<button class="size-10 flex items-center justify-center bg-primary text-white rounded-full hover:scale-110 transition-transform"><span class="material-symbols-outlined">play_arrow</span></button>
+<button class="size-10 flex items-center justify-center bg-white/20 text-white rounded-full hover:bg-white/30 transition-colors"><span class="material-symbols-outlined">add</span></button>
+</div>
+</div>
+</div>
+<div class="flex flex-col">
+<h3 class="text-white text-sm font-semibold truncate group-hover:text-primary transition-colors">The Last Stand</h3>
+<div class="flex items-center justify-between mt-1">
+<span class="text-xs text-slate-500">2023</span>
+<span class="text-xs text-slate-500">R</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Content Rail 2: Debate Worthy -->
+<section class="flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<h2 class="text-white text-2xl font-bold leading-tight flex items-center gap-2">
+                        Debate-Worthy Series
+                        <span class="material-symbols-outlined text-primary">forum</span>
+</h2>
+<a class="text-sm font-medium text-primary hover:text-primary/80" href="browse.html">View all</a>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+<!-- Card 1 -->
+<div class="group relative flex flex-col gap-2 cursor-pointer">
+<div class="relative aspect-[2/3] w-full overflow-hidden rounded-lg bg-surface-dark">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Abstract mind bending art for a psychological thriller" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB_aNNLsSIkChaji06z3SvZpJ7R1bfBXB0qQ5SJQzwouaM7pEtjes-NbBJb3gYdMSLmppSL66AIBnFtxroz9j4x8VvMhaa0QdraKftfrrpWNbS8d3LCroCj4bnjjOeiyAZEvsyWLeD0jzTIJlMFo4SSPZNhnbWgu0dM4pXDWbvvo5naYNKZjbLuaway2eqwVtWjM9DMWFWi5EkkhyibXhmRMtUsgDq2BRFOUYqKDUbiu4ywoVkGd92CQF-rE7ocDAlRpx0S2AbJJj0");'></div>
+<div class="absolute inset-0 bg-black/80 opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex flex-col items-center justify-center gap-3 p-4">
+<div class="flex gap-2">
+<button class="size-10 flex items-center justify-center bg-primary text-white rounded-full hover:scale-110 transition-transform"><span class="material-symbols-outlined">play_arrow</span></button>
+<button class="size-10 flex items-center justify-center bg-white/20 text-white rounded-full hover:bg-white/30 transition-colors"><span class="material-symbols-outlined">add</span></button>
+</div>
+<div class="text-center mt-2">
+<p class="text-green-400 font-bold text-sm">Most Discussed</p>
+</div>
+</div>
+</div>
+<div class="flex flex-col">
+<h3 class="text-white text-sm font-semibold truncate group-hover:text-primary transition-colors">Severance</h3>
+<div class="flex items-center justify-between mt-1">
+<span class="text-xs text-slate-500">Season 2</span>
+<span class="text-xs text-slate-500">TV-MA</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group relative flex flex-col gap-2 cursor-pointer">
+<div class="relative aspect-[2/3] w-full overflow-hidden rounded-lg bg-surface-dark">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Dark gritty city street for crime drama" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBUAPU2-T1NBAXndkSlYG3rGtfwRuZ4jilEYCwN9KmB8Z9JrWceAEnL5l0R_m5u8C4zkFkwGHfjNpCZIAg00xdZ5GxjAqPuvY5HTMYz8OMq0luxqplxbtMd9x9d5CrGg8ZLYXyjdGlP-FET0U2eYkkKCXEEOdWGTjpppdWb1-RZ0T8xlbLD-lofgOrY1UgdbKFGbaN2B3dvAaXYtPzHiXfwXlS99qwqzadP-_mfFxBzxKCWa7LLZHgw6YevBdU0CkoJgHfwc4h9cuM");'></div>
+<div class="absolute inset-0 bg-black/80 opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex flex-col items-center justify-center gap-3 p-4">
+<div class="flex gap-2">
+<button class="size-10 flex items-center justify-center bg-primary text-white rounded-full hover:scale-110 transition-transform"><span class="material-symbols-outlined">play_arrow</span></button>
+<button class="size-10 flex items-center justify-center bg-white/20 text-white rounded-full hover:bg-white/30 transition-colors"><span class="material-symbols-outlined">add</span></button>
+</div>
+</div>
+</div>
+<div class="flex flex-col">
+<h3 class="text-white text-sm font-semibold truncate group-hover:text-primary transition-colors">The Wire</h3>
+<div class="flex items-center justify-between mt-1">
+<span class="text-xs text-slate-500">HBO</span>
+<div class="flex -space-x-1.5">
+<img alt="User" class="size-4 rounded-full border border-background-dark" data-alt="Small user avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJp1ALoLhgvpyMX1Of7_fRVobs2brqD73yJMbNo3qqKrK4Jk3oOIQvRoGfvxEgrvBz4x23HimUpbYnkU8qJf4e-wOULXSgjva_YwsPFOaqLRGD6Yk91V0_R0bWUQyNaNqCZ-W1ZT2uaDYidIl5qNHizdoDl964qnTgru8waj5BdTp0DgZrYeI94ecPfCa4I_SouIx0qehMs0AfDtwMu2J32xDykjWZG6G1PgR9Y9zhnZvPvxe3O71h3GN-flSSY7vS2ScN0VUvwaQ"/>
+<img alt="User" class="size-4 rounded-full border border-background-dark" data-alt="Small user avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5K_Z26Mob8J2Xm5O2tqOk9Z0YwqrntGtE23pHGocAimcoC2EsXAm-q_wu0kY-EALvIzOBf6vYwoqglHbgMZF6fOJBDmY9RNJ-Cpt5b4CY5ss88FqQViqqDcGo8x9rAjECQ5Izv9lWYGER4OA_RxZLTkbSCbPFjBGVDJKirXdZrK-3bGQf1e75NAZJz7rD7zPmfjRHs7n8gHtYXXqqXqKRTwUekPjxM9S5lXvxoskptrof1Kn05RSkpnS99awdKIgs6Tkx5xV2gVQ"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group relative flex flex-col gap-2 cursor-pointer">
+<div class="relative aspect-[2/3] w-full overflow-hidden rounded-lg bg-surface-dark">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Fantasy landscape with dragon" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAQwaiVoqvRAXbQGXUCE2GdvZ3CXivS8R66TgTLsHFGvaViFP3KRTpitrOvCKlKyFU_NmRxPGg1YyiVcmqAtimcQPh5Vx0Bktp3a5cw12h1e8VeumbEyd3rdCMt4d0p63MpHhHFxW2b4aLq8sSjGNS7lZuYcjL8NMnUvJDdqAnqWyDk-2bFdcCK5NrAh5y4QdRP5grmpgWxo04fCZ-hshLJv2K4rHBtOb8u9FhU5wZQoxYxPY_cCzSdXNazUV1qFecIm2iW0DoqgmQ");'></div>
+<div class="absolute inset-0 bg-black/80 opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex flex-col items-center justify-center gap-3 p-4">
+<div class="flex gap-2">
+<button class="size-10 flex items-center justify-center bg-primary text-white rounded-full hover:scale-110 transition-transform"><span class="material-symbols-outlined">play_arrow</span></button>
+<button class="size-10 flex items-center justify-center bg-white/20 text-white rounded-full hover:bg-white/30 transition-colors"><span class="material-symbols-outlined">add</span></button>
+</div>
+</div>
+</div>
+<div class="flex flex-col">
+<h3 class="text-white text-sm font-semibold truncate group-hover:text-primary transition-colors">House of Dragons</h3>
+<div class="flex items-center justify-between mt-1">
+<span class="text-xs text-slate-500">Season 1</span>
+<span class="text-xs text-slate-500">TV-MA</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+
+<section class="mt-10">
+    <div class="flex items-center justify-between mb-4">
+        <h3 class="text-white text-xl font-bold">Trending TV Series</h3>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+        <!-- TV Show 1 -->
+        <div class="group relative flex flex-col gap-2 cursor-pointer" onclick="location.href='details.html'">
+            <div class="relative aspect-[2/3] w-full overflow-hidden rounded-lg bg-surface-dark">
+                <div class="absolute inset-0 bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCQVd-1IqLSr09a1Q");'></div>
+            </div>
+            <h4 class="text-white text-sm font-bold truncate">Better Call Saul</h4>
+        </div>
+        <!-- TV Show 2 -->
+        <div class="group relative flex flex-col gap-2 cursor-pointer" onclick="location.href='details.html'">
+            <div class="relative aspect-[2/3] w-full overflow-hidden rounded-lg bg-surface-dark">
+                <div class="absolute inset-0 bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCQVd-1IqLSr09a1Q");'></div>
+            </div>
+            <h4 class="text-white text-sm font-bold truncate">The Last of Us</h4>
+        </div>
+    </div>
+</section>
+</main>
+<footer class="w-full border-t border-slate-200 dark:border-[#2a2a2a] py-8 mt-8 bg-surface-dark">
+<div class="layout-container flex flex-col items-center justify-center gap-4 text-center">
+<div class="flex items-center gap-2 text-slate-400">
+<span class="material-symbols-outlined">movie_filter</span>
+<span class="text-sm font-medium">GroupStream © 2024</span>
+</div>
+<div class="flex gap-6 text-sm text-slate-500">
+<a class="hover:text-white transition-colors" href="#">Privacy</a>
+<a class="hover:text-white transition-colors" href="#">Terms</a>
+<a class="hover:text-white transition-colors" href="#">Help</a>
+</div>
+</div>
+</footer>
+</div>
+</body></html>
+
+
+
+

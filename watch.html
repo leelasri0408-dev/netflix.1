@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Active Group Watch Room</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&amp;family=Noto+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ea2a33",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#181111", // Keeping the requested dark background
+                        "surface-dark": "#211111",
+                        "surface-lighter": "#2a1d1d",
+                        "text-secondary": "#b89d9f",
+                    },
+                    fontFamily: {
+                        "display": ["Spline Sans", "Noto Sans", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for chat */
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #382929;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display overflow-hidden h-screen flex flex-col">
+<!-- Header -->
+<header class="flex shrink-0 items-center justify-between border-b border-solid border-slate-200 dark:border-[#382929] px-6 py-3 bg-white dark:bg-[#181111] z-20">
+<div class="flex items-center gap-4">
+<div class="flex items-center justify-center size-8 rounded-lg bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-2xl">movie</span>
+</div>
+<div>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">Friday Night Movie Room - Watching Interstellar</h2>
+<div class="flex items-center gap-2">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+</span>
+<span class="text-xs text-text-secondary font-medium">Synced with Host</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex items-center justify-center gap-2 h-9 px-4 rounded-lg bg-primary text-white text-sm font-bold hover:bg-red-600 transition-colors">
+<span class="material-symbols-outlined text-[18px]">link</span>
+<span class="hidden sm:inline">Invite</span>
+</button>
+<button class="flex items-center justify-center size-9 rounded-lg bg-slate-100 dark:bg-[#382929] text-slate-700 dark:text-white hover:bg-slate-200 dark:hover:bg-[#4a3636] transition-colors" title="Settings">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+</button>
+<button class="flex items-center justify-center size-9 rounded-lg bg-slate-100 dark:bg-[#382929] text-slate-700 dark:text-white hover:bg-red-900/30 hover:text-red-400 transition-colors" title="Leave Room">
+<span class="material-symbols-outlined text-[20px]">logout</span>
+</button>
+<div class="w-px h-6 bg-slate-200 dark:bg-[#382929] mx-1"></div>
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-9 border-2 border-slate-200 dark:border-[#382929]" data-alt="User profile picture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAA_U1TNdzl4-5cpAqzWr5RO7QSVPBFnxxdEEqUgsuYl3Q-87WA7ZpLAbZNw8FJEqsF5dx_Tzp0DAy1PUob3Nr2eoPuTDyWjzsBzAXx8vvjDelkoH1n9COENegfqhvQ4uumpEIoVhGtajsHdc1X8Mfybo8goQOEhIDn1KXcuOt3vWhv8LRZuL9CM1PM0IAF7b4vzxM_tG7PlOXSM8FvPyIxER6e-Knu6cxEJxOxr4Xxw2V_bgSegw0S6C7TAp86zpOtNQRGkOu8uSQ");'></div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex flex-1 overflow-hidden relative">
+<!-- Video Player Section (Left/Center) -->
+<div class="flex-1 flex flex-col bg-black relative group">
+<!-- Video Container -->
+<div class="flex-1 relative flex items-center justify-center bg-black overflow-hidden">
+<!-- Video Background Placeholder -->
+<div class="absolute inset-0 bg-cover bg-center opacity-60" data-alt="Still frame from a movie scene showing a dramatic landscape" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC_RecM-TQyA9pjKuvXpMqKbaZI4C1dccweX-WZ1PO8yvy7-BjLTFQO5QbpnC8_mWJ71bJBlswlpdBN9xdDxWys_HhmYawtNO5iLBRTTBQbf3uI7i38we4wf3y8U2JcyR6VlScs9sqJs2eJprCj3mY55Flu9pKoJvgw17RrWSX61iEgzExc9cuhI-t23IU8XQQs39Gd5t24dPZmlx-I48HjJ9t_tsnHbQIJQXVYJH8B8fRbKvpDhrAhUp94F6EgJVj4cBqzH9qgaHg");'></div>
+<!-- Play Button Overlay (Big Center) -->
+<button class="absolute z-10 flex items-center justify-center rounded-full size-20 bg-primary/90 text-white shadow-2xl hover:scale-105 transition-transform cursor-pointer backdrop-blur-sm">
+<span class="material-symbols-outlined text-4xl fill-1">play_arrow</span>
+</button>
+<!-- Reaction Floating Overlay (Example animation) -->
+<div class="absolute right-10 bottom-32 flex flex-col gap-2 pointer-events-none z-10">
+<div class="animate-bounce text-4xl opacity-0 translate-y-4" style="animation: floatUp 2s ease-out infinite; animation-delay: 0.5s;">❤️</div>
+<div class="animate-bounce text-4xl opacity-0 translate-y-4" style="animation: floatUp 2.5s ease-out infinite; animation-delay: 1.2s;">😂</div>
+</div>
+<!-- Video Controls Overlay (Bottom) -->
+<div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent pt-20 px-6 pb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<!-- Progress Bar -->
+<div class="relative group/progress cursor-pointer py-2">
+<div class="absolute -top-8 left-[30%] bg-black/80 text-white text-xs px-2 py-1 rounded hidden group-hover/progress:block">32:15</div>
+<div class="h-1.5 w-full bg-white/20 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[30%] relative"></div>
+</div>
+<div class="absolute top-1.5 left-[30%] size-3 bg-white rounded-full scale-0 group-hover/progress:scale-100 transition-transform"></div>
+</div>
+<div class="flex items-center justify-between mt-2">
+<div class="flex items-center gap-4">
+<button class="text-white hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-3xl">play_arrow</span>
+</button>
+<button class="text-white hover:text-primary transition-colors group/volume relative">
+<span class="material-symbols-outlined text-2xl">volume_up</span>
+<!-- Volume Slider Popover -->
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-8 h-24 bg-[#2a1d1d] rounded-lg p-2 hidden group-hover/volume:flex justify-center items-end shadow-xl">
+<div class="w-1.5 h-full bg-white/20 rounded-full relative">
+<div class="absolute bottom-0 w-full h-[70%] bg-white rounded-full"></div>
+</div>
+</div>
+</button>
+<div class="text-sm font-medium text-white/90 font-mono tracking-wide">
+                                32:15 <span class="text-white/40">/</span> 1:45:02
+                            </div>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white text-sm backdrop-blur-md transition-colors">
+<span class="material-symbols-outlined text-[18px]">closed_caption</span>
+<span>English</span>
+</button>
+<button class="text-white hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-2xl">settings</span>
+</button>
+<button class="text-white hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-2xl">fullscreen</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Reaction Bar (Quick Access) -->
+<div class="h-16 bg-[#181111] border-t border-[#382929] flex items-center justify-center gap-6 px-4 z-20">
+<button class="group flex flex-col items-center gap-1 min-w-[3rem] hover:-translate-y-1 transition-transform">
+<span class="text-2xl grayscale group-hover:grayscale-0 transition-all">❤️</span>
+<span class="text-[10px] text-text-secondary font-bold">12</span>
+</button>
+<button class="group flex flex-col items-center gap-1 min-w-[3rem] hover:-translate-y-1 transition-transform">
+<span class="text-2xl grayscale group-hover:grayscale-0 transition-all">😂</span>
+<span class="text-[10px] text-text-secondary font-bold">8</span>
+</button>
+<button class="group flex flex-col items-center gap-1 min-w-[3rem] hover:-translate-y-1 transition-transform">
+<span class="text-2xl grayscale group-hover:grayscale-0 transition-all">😮</span>
+<span class="text-[10px] text-text-secondary font-bold">3</span>
+</button>
+<button class="group flex flex-col items-center gap-1 min-w-[3rem] hover:-translate-y-1 transition-transform">
+<span class="text-2xl grayscale group-hover:grayscale-0 transition-all">😢</span>
+<span class="text-[10px] text-text-secondary font-bold">1</span>
+</button>
+<button class="group flex flex-col items-center gap-1 min-w-[3rem] hover:-translate-y-1 transition-transform">
+<span class="text-2xl grayscale group-hover:grayscale-0 transition-all">👏</span>
+<span class="text-[10px] text-text-secondary font-bold">5</span>
+</button>
+<div class="w-px h-8 bg-[#382929] mx-2"></div>
+<button class="size-10 rounded-full bg-[#2a1d1d] hover:bg-[#382929] text-text-secondary flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined">add_reaction</span>
+</button>
+</div>
+</div>
+<!-- Social Sidebar (Right) -->
+<aside class="w-[360px] flex flex-col bg-white dark:bg-[#181111] border-l border-slate-200 dark:border-[#382929] shrink-0 z-20 shadow-xl">
+<!-- Tabs -->
+<div class="flex border-b border-slate-200 dark:border-[#382929]">
+<button class="flex-1 py-4 text-center relative group">
+<span class="text-sm font-bold text-slate-900 dark:text-white">Chat</span>
+<div class="absolute bottom-0 left-0 w-full h-0.5 bg-primary"></div>
+</button>
+<button class="flex-1 py-4 text-center relative group hover:bg-slate-50 dark:hover:bg-[#211111]">
+<span class="text-sm font-bold text-text-secondary">Viewers (4) - <span class="text-[10px] text-green-500">Live</span></span>
+<div class="absolute bottom-0 left-0 w-full h-0.5 bg-transparent group-hover:bg-slate-300 dark:group-hover:bg-[#382929]"></div>
+</button>
+</div>
+<!-- Chat Content -->
+<div class="flex-1 overflow-y-auto custom-scrollbar p-4 space-y-5">
+<!-- System Message -->
+<div class="flex justify-center my-2">
+<span class="px-3 py-1 bg-slate-100 dark:bg-[#2a1d1d] rounded-full text-[11px] font-medium text-text-secondary uppercase tracking-wider">
+                        Today at 8:30 PM
+                    </span>
+</div>
+<!-- Message Received -->
+<div class="flex gap-3 items-start group">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-8 shrink-0 mt-1" data-alt="Alice avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCA8Rkjll-43l6QC13DfWgh9q6L_TY4iRXXxFy0BqbnUBDCFPoh2Acw-1Akk5oWmhh2nLLwaUwGNaQo6TjFFUJnNfdE2oS3DvlTfW_8Pubz_yFwc0J5hkbD4e_WV8ik2KLKRmJ-toHkVRDWPfmHDYukVVmfBzC4ZPigacN__wmif_VZNugNB447_eqThrDJ89szqR2_rA6v-fZe_jzMXzKfTtETyN92icSWXg7yFwTlvtIfrAOXavQ1WVrOsqN2lcuvcTuUX21uqw0");'></div>
+<div class="flex flex-col gap-1 max-w-[85%]">
+<div class="flex items-baseline justify-between gap-2">
+<span class="text-[13px] font-bold text-text-secondary group-hover:text-primary transition-colors">Alice</span>
+<span class="text-[10px] text-text-secondary/60">8:32 PM</span>
+</div>
+<div class="bg-slate-100 dark:bg-[#2a1d1d] text-slate-800 dark:text-slate-200 text-[14px] leading-relaxed px-3 py-2 rounded-2xl rounded-tl-sm">
+                            Hey guys! Is everyone ready for the movie? 🍿
+                        </div>
+</div>
+</div>
+<!-- Message Received -->
+<div class="flex gap-3 items-start group">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-8 shrink-0 mt-1" data-alt="Bob avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBe2XYOglPzMfBLL8PBS1NHqCGS3o31R7bekXqHK_CrWIrrU5yJ7XEHsG9im3QykrXw0O1TPwquVDBDiL4LKWPUUJIIjjE3iIqyFKMxrvbcaajg1G6qV_K-xuRlLrE3LPFEV_F2lPRhuO-stMp238gDVmCWOx_odN5awAmhdP_Hfsz-HDAUhCdcwiRG7iToAn_qu1XoCsC2bVrjtEDKAwcNB5J6I4-3B5HASZ_tPCqPbw-_QHKGp9vFsrCmqC1hHvQsrz3iNKVrUos");'></div>
+<div class="flex flex-col gap-1 max-w-[85%]">
+<div class="flex items-baseline justify-between gap-2">
+<span class="text-[13px] font-bold text-text-secondary group-hover:text-primary transition-colors">Bob</span>
+<span class="text-[10px] text-text-secondary/60">8:33 PM</span>
+</div>
+<div class="bg-slate-100 dark:bg-[#2a1d1d] text-slate-800 dark:text-slate-200 text-[14px] leading-relaxed px-3 py-2 rounded-2xl rounded-tl-sm">
+                            Ready! I've been waiting for this all week.
+                        </div>
+</div>
+</div>
+<!-- Message Sent (Self) -->
+<div class="flex flex-row-reverse gap-3 items-start group">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-8 shrink-0 mt-1" data-alt="User avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAxg1GsEFFF941ZEoO6LMm4EOGKhQvJUjUUGwpVfS62bOGZIX1W_jZlKzAtRbnSLbV0bMrmALYAJsydziAuSTwQovV9pMdwYzi0LAA90HhRt4RK3MDlF0DHYhxk8LBkM8EyOfVvZmOuI0h9B4IHgBdgcTKzpboZF8k_OXewpG-kisZQMigVBYEAJevBQsiD2JpdRcmFv0NmJYiGqILu_ONFGXuHG1YA9sxUygGSEfhFEfkVzTUyezHGU6GLn4qZ4gsWDBMhfXDXs8g");'></div>
+<div class="flex flex-col items-end gap-1 max-w-[85%]">
+<div class="flex items-baseline justify-between gap-2 flex-row-reverse">
+<span class="text-[13px] font-bold text-text-secondary group-hover:text-primary transition-colors">You</span>
+<span class="text-[10px] text-text-secondary/60">8:34 PM</span>
+</div>
+<div class="bg-primary text-white text-[14px] leading-relaxed px-3 py-2 rounded-2xl rounded-tr-sm">
+                            Wait, pause it for a sec, I need to grab my popcorn!
+                        </div>
+</div>
+</div>
+<!-- System Notification -->
+<div class="flex items-center gap-2 px-3 py-2 rounded bg-primary/10 border border-primary/20">
+<span class="material-symbols-outlined text-primary text-sm">pause_circle</span>
+<p class="text-xs text-primary font-medium">Video paused by <strong>You</strong></p>
+</div>
+<!-- Message Received -->
+<div class="flex gap-3 items-start group">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-8 shrink-0 mt-1" data-alt="Alice avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCXNpI11-qJzOU3lU5tP_8LMRF_iMOGHd3iWxyOnwnk_gD2q2b9FwQ3mbR6dXF5Ju05tmxfs5VhXqiSvdMNsH1vXX7BvjhCjkCqnwAjBBhxXZJwUVAd62Ht7KXXp9UXrnzuskTYyE_W3MDliRQ0ynlQrmgJDw2WiGZGsJOaV5AtTCDY1oqvAVjawEpBXXC4d9x-Tx4BiwsKB5BIwhqe8NTbvJlOlJjNgtvyEmU20fvCwcboEqXUMOzOludDwUh7mjLKv77XAg0U2-w");'></div>
+<div class="flex flex-col gap-1 max-w-[85%]">
+<div class="flex items-baseline justify-between gap-2">
+<span class="text-[13px] font-bold text-text-secondary group-hover:text-primary transition-colors">Alice</span>
+<span class="text-[10px] text-text-secondary/60">8:35 PM</span>
+</div>
+<div class="bg-slate-100 dark:bg-[#2a1d1d] text-slate-800 dark:text-slate-200 text-[14px] leading-relaxed px-3 py-2 rounded-2xl rounded-tl-sm">
+                            Haha hurry up! 😂
+                        </div>
+<!-- Reaction attached to message -->
+<div class="flex -mt-2 ml-2">
+<span class="bg-[#382929] border border-[#181111] rounded-full px-1.5 py-0.5 text-[10px]">🍿 1</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Chat Input -->
+<div class="p-4 border-t border-slate-200 dark:border-[#382929] bg-white dark:bg-[#181111]">
+<div class="relative flex items-center gap-2 bg-slate-100 dark:bg-[#2a1d1d] rounded-xl px-2 py-2 border border-transparent focus-within:border-primary/50 transition-colors">
+<button class="flex items-center justify-center size-8 rounded-lg text-text-secondary hover:text-white hover:bg-[#382929] transition-colors shrink-0">
+<span class="material-symbols-outlined text-[20px]">add_circle</span>
+</button>
+<input class="flex-1 bg-transparent border-none text-sm text-slate-900 dark:text-white placeholder-text-secondary focus:ring-0 p-0" placeholder="Type a message..." type="text"/>
+<button class="flex items-center justify-center size-8 rounded-lg text-text-secondary hover:text-white hover:bg-[#382929] transition-colors shrink-0">
+<span class="material-symbols-outlined text-[20px]">sentiment_satisfied</span>
+</button>
+<button class="flex items-center justify-center size-8 rounded-lg bg-primary text-white hover:bg-red-600 transition-colors shrink-0 shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-[18px]">send</span>
+</button>
+</div>
+</div>
+<div class='border-t border-[#382929] bg-[#1a1111]'>
+<div class="p-4 space-y-4">
+    <div class="flex items-center justify-between p-3 rounded-lg bg-slate-50 dark:bg-[#2a1d1d] hover:bg-slate-100 dark:hover:bg-[#382929] transition-colors cursor-pointer">
+        <div class="flex items-center gap-3">
+            <div class="bg-center bg-no-repeat bg-cover rounded-full size-10 border-2 border-primary" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAxg1GsEFFF941ZEoO6LMm4EOGKhQvJUjUUGwpVfS62bOGZIX1W_jZlKzAtRbnSLbV0bMrmALYAJsydziAuSTwQovV9pMdwYzi0LAA90HhRt4RK3MDlF0DHYhxk8LBkM8EyOfVvZmOuI0h9B4IHgBdgcTKzpboZF8k_OXewpG-kisZQMigVBYEAJevBQsiD2JpdRcmFv0NmJYiGqILu_ONFGXuHG1YA9sxUygGSEfhFEfkVzTUyezHGU6GLn4qZ4gsWDBMhfXDXs8g");'></div>
+            <div>
+                <p class="text-slate-900 dark:text-white text-sm font-bold flex items-center gap-2">You <span class="bg-primary/20 text-primary text-[10px] px-1.5 py-0.5 rounded">HOST</span></p>
+                <p class="text-text-secondary text-xs">Ready to sync</p>
+            </div>
+        </div>
+        <div class="size-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.5)]"></div>
+    </div>
+    <div class="flex items-center justify-between p-3 rounded-lg hover:bg-slate-50 dark:hover:bg-[#2a1d1d] transition-colors cursor-pointer">
+        <div class="flex items-center gap-3">
+            <div class="bg-center bg-no-repeat bg-cover rounded-full size-10" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCA8Rkjll-43l6QC13DfWgh9q6L_TY4iRXXxFy0BqbnUBDCFPoh2Acw-1Akk5oWmhh2nLLwaUwGNaQo6TjFFUJnNfdE2oS3DvlTfW_8Pubz_yFwc0J5hkbD4e_WV8ik2KLKRmJ-toHkVRDWPfmHDYukVVmfBzC4ZPigacN__wmif_VZNugNB447_eqThrDJ89szqR2_rA6v-fZe_jzMXzKfTtETyN92icSWXg7yFwTlvtIfrAOXavQ1WVrOsqN2lcuvcTuUX21uqw0");'></div>
+            <div>
+                <p class="text-slate-900 dark:text-white text-sm font-medium">Alice</p>
+                <p class="text-text-secondary text-xs">Watching Stage 1</p>
+            </div>
+        </div>
+        <div class="size-2 rounded-full bg-green-500"></div>
+    </div>
+</div>
+</div></aside>
+<!-- Viewer List Panel (Hidden by default, shown for structure visualization - assume tab switch reveals this) -->
+<!-- 
+        To visualize this, imagine the aside content above is replaced by this block if "Viewers" tab was active.
+        I will keep it commented out or hidden via CSS class 'hidden' to respect the single-page request without JS logic.
+        -->
+<div class="hidden absolute top-0 right-0 w-[360px] h-full bg-[#181111] border-l border-[#382929] z-20 flex-col">
+<!-- Header duplicated for context -->
+<div class="flex border-b border-[#382929]">
+<button class="flex-1 py-4 text-center relative group">
+<span class="text-sm font-bold text-text-secondary">Chat</span>
+</button>
+<button class="flex-1 py-4 text-center relative group">
+<span class="text-sm font-bold text-white">Viewers (4) - <span class="text-[10px] text-green-500">Live</span></span>
+<div class="absolute bottom-0 left-0 w-full h-0.5 bg-primary"></div>
+</button>
+</div>
+<div class="p-4 space-y-4">
+<div class="flex items-center justify-between p-3 rounded-lg bg-[#2a1d1d]">
+<div class="flex items-center gap-3">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-10" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAbPc1nZ-j1oXGeyuLXDZERml5Zh1Xjw-tuEGqd9WS8FaPWsCpg-I_jWcgo4YsNi0zgADqOyeRMfPn6dHQCqHEfNS9Fn1W6ycYjgs_MEpMcHixyLQdqSok6yKSTs055ohG38qM0J2ZQaKeoWHB4o9UZ1Xp-5hZYOb8e9Gb8GIsrxkzuntpbFWPQmyWGCqMJRZfT3qT3bHst4TcFNJyzUyJLI0VPTtQMk56r1gb890MW_VO3UFg_4Ghl_r5QX1I1kr-tKRKFKHpMiGk");'></div>
+<div>
+<p class="text-white text-sm font-bold flex items-center gap-2">You <span class="bg-primary/20 text-primary text-[10px] px-1.5 py-0.5 rounded">HOST</span></p>
+<p class="text-text-secondary text-xs">0:37 / Paused</p>
+</div>
+</div>
+<div class="size-2 rounded-full bg-green-500"></div>
+</div>
+<!-- More viewers... -->
+</div>
+</div>
+</main>
+<style>
+        @keyframes floatUp {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-100px); opacity: 0; }
+        }
+    </style>
+</body></html>
+
+
+
+
+
+

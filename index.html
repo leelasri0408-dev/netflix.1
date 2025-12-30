@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GroupStream - Watch Together</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ea2a33",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#181111", // Keeping the one from the components provided for consistency
+                        "surface-dark": "#261c1c",
+                        "border-dark": "#382929",
+                        "text-secondary": "#b89d9f"
+                    },
+                    fontFamily: {
+                        "display": ["Spline Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Spline Sans', sans-serif;
+        }
+        /* Custom scrollbar hiding */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white min-h-screen flex flex-col overflow-x-hidden">
+<!-- TopNavBar -->
+<header class="sticky top-0 z-50 w-full border-b border-solid border-gray-200 dark:border-border-dark bg-background-light/95 dark:bg-[#181111]/95 backdrop-blur-sm px-4 md:px-10 py-3">
+<div class="layout-content-container max-w-[1200px] mx-auto flex items-center justify-between whitespace-nowrap">
+<div class="flex items-center gap-8">
+<a class="flex items-center gap-2 text-slate-900 dark:text-white hover:opacity-90 transition-opacity" href="#">
+<div class="size-8 text-primary">
+<svg fill="currentColor" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z"></path>
+</svg>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-[-0.015em]">GroupStream</h2>
+</a>
+<label class="hidden md:flex flex-col min-w-40 !h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full group focus-within:ring-2 focus-within:ring-primary/50">
+<div class="text-slate-500 dark:text-text-secondary flex border-none bg-gray-100 dark:bg-border-dark items-center justify-center pl-4 rounded-l-lg border-r-0">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-900 dark:text-white focus:outline-0 focus:ring-0 border-none bg-gray-100 dark:bg-border-dark focus:border-none h-full placeholder:text-slate-500 dark:placeholder:text-text-secondary px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal" placeholder="Search movies..." value=""/>
+</div>
+</label>
+</div>
+<div class="flex flex-1 justify-end gap-4 md:gap-8 items-center">
+<div class="hidden md:flex items-center gap-6 lg:gap-9">
+<a class="text-slate-700 dark:text-white text-sm font-medium leading-normal hover:text-primary transition-colors" href="index.html#how-it-works">How it Works</a>
+<a class="text-slate-700 dark:text-white text-sm font-medium leading-normal hover:text-primary transition-colors" href="create_party.html">Create Room</a>
+</div>
+<div class="flex gap-2">
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-9 md:h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-red-600 transition-colors shadow-lg shadow-primary/20"   onclick="location.href='signup.html'"><span class="truncate">Sign Up</span></button>
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-9 md:h-10 px-4 bg-gray-200 dark:bg-border-dark text-slate-900 dark:text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-gray-300 dark:hover:bg-[#4a3636] transition-colors"   onclick="location.href='signup.html'"><span class="truncate">Login</span></button>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-grow flex flex-col items-center w-full">
+<!-- Hero Section -->
+<section class="w-full flex justify-center py-5 px-4 md:px-10">
+<div class="layout-content-container flex flex-col max-w-[1200px] flex-1">
+<div class="@container">
+<div class="@[480px]:p-4">
+<div class="relative flex min-h-[480px] flex-col gap-6 bg-cover bg-center bg-no-repeat @[480px]:gap-8 @[480px]:rounded-2xl items-center justify-center p-8 overflow-hidden shadow-2xl" data-alt="Dark cinematic movie theater atmosphere with blurred screens in background" style='background-image: linear-gradient(rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.8) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuAJWX6p-fYKlEE2HqZBUmb8az1c70WfE1PnS7-PaHoyOND9IXIQw30GFrXbBTDAjmSMAbgU4qmNOdYWhQaJzYvMUlNbdlbTz9U3epCI7xGrFr37NZWuFGOqEoYkbvhilRpiZzBaAmUGPtYyoqZ6YZB21256sPJ8oD2BJyJy00nK0M_2QpYgjzBW4wmYaUkDp5mPa5NLyxt1FKjSctRalHeBs-ssWC3i-KQPd283SEFvpWzAGnL925ukvy6S4Sv2ZUCGMkdwNqTpDmE");'>
+<!-- Animated Background Effect -->
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark via-transparent to-transparent opacity-90"></div>
+<div class="relative z-10 flex flex-col gap-4 text-center max-w-[800px]">
+<div class="inline-flex items-center justify-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/10 w-fit mx-auto mb-2">
+<span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+<span class="text-xs font-medium text-white tracking-wide uppercase">14,203 Parties Live Now</span>
+</div>
+<h1 class="text-white text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-6xl @[480px]:font-black @[480px]:leading-tight drop-shadow-lg">
+                                    Cinema is better <span class="text-primary">with friends.</span>
+</h1>
+<h2 class="text-gray-200 text-base font-normal leading-relaxed @[480px]:text-xl @[480px]:font-normal max-w-[600px] mx-auto drop-shadow-md">
+                                    Sync video perfectly, chat in real-time, and host watch parties for free. Compatible with Netflix, YouTube, and more.
+                                </h2>
+</div>
+<div class="relative z-10 flex flex-wrap gap-4 justify-center mt-4">
+<button class="flex min-w-[140px] cursor-pointer items-center justify-center gap-2 rounded-lg h-12 px-6 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-red-600 transition-all hover:scale-105 shadow-xl shadow-primary/30">
+<span class="material-symbols-outlined text-[20px]">play_circle</span>
+<span class="truncate" onclick="window.location.href='create_party.html'" style="cursor:pointer">Start a Party</span>
+</button>
+<button class="flex min-w-[140px] cursor-pointer items-center justify-center gap-2 rounded-lg h-12 px-6 bg-white/10 backdrop-blur-md border border-white/20 text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-white/20 transition-all hover:scale-105">
+<span class="material-symbols-outlined text-[20px]">group_add</span>
+<span class="truncate"  style="cursor:pointer">Join a Party</span>
+</button>
+</div>
+<!-- Social Proof Avatars -->
+<div class="relative z-10 mt-6 flex items-center gap-3">
+<div class="flex -space-x-3">
+<img alt="User avatar" class="w-8 h-8 rounded-full border-2 border-background-dark object-cover" data-alt="Portrait of a smiling woman" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMeRHcMXNFokrZpNU3f3j0OPeHBGZxw-gcbTv0va0al5bym5PsNKVXEZ_wuNpNJkLMUB0C_HqBzd4JZ6ZKPcjhaazaszec25MIK1EcxUW1sv-TLhCBx5noK3J7-4QSAr8FerT4dQbR9sDSHtgdPncpCrZ3NzAfW86ciJBVIhUm4a0a8NixxKKeBEdTT_tZPWi_C48fABISrUGI1JUXyrstk8aQUJYY9iCHys5CTqtZup006g-NUnxXSCcj6x1z1Sv8n5A8woFzJiI"/>
+<img alt="User avatar" class="w-8 h-8 rounded-full border-2 border-background-dark object-cover" data-alt="Portrait of a man with glasses" src="https://lh3.googleusercontent.com/aida-public/AB6AXuADObjKLFWRHZY1uxoIDLxTrTlc2dN6y4Y9ayGYOG1xkBl58xloxsq5cmreFC7GcorGPCZM0ZDg8cPXdNBumSl0bb_mELK10YDCSWURqhgxacTyTEjtgrgUzRYRyTUWVcVGj_WjzOv7V0MTE5mMIMzYD3R-P-CldhpQYIT81bhMF9CL2mzmsSd7Rrnm4XgtCr3Uh7vu-Alp0bI5Q7quU2kSXTqWvu5NT27ZOvfvNL2cLgnxSTQKRTT4m_xfnXDtYJK2RV91qIAOGU8"/>
+<img alt="User avatar" class="w-8 h-8 rounded-full border-2 border-background-dark object-cover" data-alt="Portrait of a smiling woman" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtGkSzZd4c5B6JyJnuqMjdYS49oJmMDTG3Ilcx5Jk_R3R3wLrKpmS7b20De05Fe2C7FQfGv-txLrLSMKa9v5VCdZyA68c9DC9AUoY-LKyJM-0yHwYmcTH5aylTRKme-DEa4KA8alqScPmLqHdTeTNfCuhz4JJ7yF6F7_uUIfttcL0PMTceWzz-zq60LzfrqxRJhGUS0w2C6xgtXyefsmlSktWC7plbpeJGBLQ1ZoKMzpLVjjrJUvG71k5W4p-Hfnz0ub6y04beXe4"/>
+<div class="w-8 h-8 rounded-full border-2 border-background-dark bg-surface-dark flex items-center justify-center text-[10px] font-bold text-white">
+                                        +5k
+                                    </div>
+</div>
+<p class="text-sm text-gray-300">Joined today</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Feature Section (How it works) -->
+<section class="w-full flex justify-center py-10 px-4 md:px-10 bg-gradient-to-b from-background-light to-white dark:from-background-dark dark:to-background-dark" id="how-it-works">
+<div class="layout-content-container flex flex-col max-w-[1200px] flex-1">
+<div class="flex flex-col gap-10 px-4 py-10 @container">
+<div class="flex flex-col gap-4 text-center items-center">
+<span class="text-primary font-bold tracking-wider uppercase text-sm">Simple Process</span>
+<h2 class="text-slate-900 dark:text-white tracking-light text-[32px] font-bold leading-tight @[480px]:text-4xl @[480px]:font-black">
+                            How It Works
+                        </h2>
+<p class="text-slate-600 dark:text-gray-400 text-base font-normal leading-normal max-w-[720px]">
+                            Start your watch party in three simple steps. No complex setup required.
+                        </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 p-0">
+<!-- Step 1 -->
+<div class="group flex flex-1 gap-5 rounded-xl border border-gray-200 dark:border-border-dark bg-white dark:bg-surface-dark p-6 flex-col hover:border-primary/50 transition-colors shadow-sm hover:shadow-lg dark:shadow-none">
+<div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[28px]">movie</span>
+</div>
+<div class="flex flex-col gap-2">
+<h3 class="text-slate-900 dark:text-white text-xl font-bold leading-tight">1. Select Movie</h3>
+<p class="text-slate-500 dark:text-text-secondary text-base font-normal leading-relaxed">
+                                    Log in to your favorite streaming service like Netflix, Hulu, or Disney+ within our app.
+                                </p>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="group flex flex-1 gap-5 rounded-xl border border-gray-200 dark:border-border-dark bg-white dark:bg-surface-dark p-6 flex-col hover:border-primary/50 transition-colors shadow-sm hover:shadow-lg dark:shadow-none">
+<div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[28px]">ios_share</span>
+</div>
+<div class="flex flex-col gap-2">
+<h3 class="text-slate-900 dark:text-white text-xl font-bold leading-tight">2. Share Link</h3>
+<p class="text-slate-500 dark:text-text-secondary text-base font-normal leading-relaxed">
+                                    Copy the unique party URL and send it to your friends. They can join with one click.
+                                </p>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="group flex flex-1 gap-5 rounded-xl border border-gray-200 dark:border-border-dark bg-white dark:bg-surface-dark p-6 flex-col hover:border-primary/50 transition-colors shadow-sm hover:shadow-lg dark:shadow-none">
+<div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[28px]">group</span>
+</div>
+<div class="flex flex-col gap-2">
+<h3 class="text-slate-900 dark:text-white text-xl font-bold leading-tight">3. Watch Together</h3>
+<p class="text-slate-500 dark:text-text-secondary text-base font-normal leading-relaxed">
+                                    Enjoy perfect video sync. When you pause, it pauses for everyone. Chat while you watch!
+                                </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Content Grid Section -->
+<section class="w-full flex justify-center py-5 px-4 md:px-10">
+<div class="layout-content-container flex flex-col max-w-[1200px] flex-1">
+<div class="flex items-center justify-between px-4 pb-4 pt-6">
+<h2 class="text-slate-900 dark:text-white text-[24px] font-bold leading-tight tracking-[-0.015em]">Trending for Group Watches</h2>
+<a class="text-primary text-sm font-bold flex items-center gap-1 hover:underline" href="browse.html">
+                        See All <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<div class="w-full overflow-x-auto no-scrollbar pb-8">
+<div class="flex gap-4 px-4 min-w-min">
+<!-- Movie Card 1 -->
+<div class="group relative flex flex-col gap-3 rounded-xl bg-white dark:bg-surface-dark shadow-sm hover:shadow-xl dark:shadow-black/40 min-w-[220px] max-w-[220px] transition-all duration-300 hover:-translate-y-1 overflow-hidden">
+<div class="relative w-full aspect-[2/3] overflow-hidden">
+<div class="w-full h-full bg-center bg-no-repeat bg-cover transition-transform duration-500 group-hover:scale-110" data-alt="Stranger Things poster art with red neon lights" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA8anjFKX5poKtchUlWJLh10w9RfN06tbEm-HQp0s8nGENz_2fo0Rey1NR6B5X3uK2nyt2fbeydbDW5v9-UxBpWzYLlXoZVZxdNm40g8QpmAPumdVxqHEGVZxeOZdtzaqXPvp-l9Mr8nubjEUw1HtnUF_ccfKHQdu-dp0RAUYnHSHC_zVh7hkkPgdgSao92S7bTZk8Gg5TRGSWsFTNsVWQfChKJbXpbDu9lSZhjz7UEpPx-aVrzo_JH5KWvgYreha3M0pK4hYae3Qs");'></div>
+<!-- Hover Overlay with CTA -->
+<div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-4 gap-3">
+<div class="flex -space-x-2 mb-2">
+<div class="w-6 h-6 rounded-full bg-green-500 border border-white flex items-center justify-center text-[8px] font-bold text-white">JP</div>
+<div class="w-6 h-6 rounded-full bg-blue-500 border border-white flex items-center justify-center text-[8px] font-bold text-white">AL</div>
+<div class="w-6 h-6 rounded-full bg-purple-500 border border-white flex items-center justify-center text-[8px] font-bold text-white">+2</div>
+</div>
+<button class="w-full py-2 bg-primary text-white rounded font-bold text-sm hover:bg-red-600 transition-colors">Start Party</button>
+</div>
+<div class="absolute top-2 right-2 bg-black/70 backdrop-blur-sm px-2 py-0.5 rounded text-xs font-bold text-white flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] text-yellow-400">star</span> 9.2
+                                </div>
+</div>
+<div class="flex flex-col p-4 pt-0 gap-1">
+<h3 class="text-slate-900 dark:text-white text-base font-bold leading-tight truncate">Stranger Things</h3>
+<p class="text-slate-500 dark:text-text-secondary text-sm font-normal">Sci-Fi Series • 2022</p>
+</div>
+</div>
+<!-- Movie Card 2 -->
+<div class="group relative flex flex-col gap-3 rounded-xl bg-white dark:bg-surface-dark shadow-sm hover:shadow-xl dark:shadow-black/40 min-w-[220px] max-w-[220px] transition-all duration-300 hover:-translate-y-1 overflow-hidden">
+<div class="relative w-full aspect-[2/3] overflow-hidden">
+<div class="w-full h-full bg-center bg-no-repeat bg-cover transition-transform duration-500 group-hover:scale-110" data-alt="The Witcher fantasy poster with sword" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBq8DDlxkSOSmD-oaLGVKV4gLXggSBZZvRBHnRcZn0yLMuN3y66--H2eOsTNmAOQ0ZbjaGfE5yipw70ZCO69q2bjXRAUIT1Pz6Y7afCJC2jQ-BDmSsvtgHnddOi45cAtKBihWX1b1dt6_t9uLg4FRylyAaSbd5fD-QvHpkYfMEDSxvpgHgqW8wvPgSKEjZVPbZ5B74oSfiuLLMQddOTU5O8u399CkvQw12UdjL6kEDiG2Px993Fu9FNGAWCz5BAC2RBULXJY7IUKZM");'></div>
+<!-- Hover Overlay with CTA -->
+<div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-4 gap-3">
+<button class="w-full py-2 bg-primary text-white rounded font-bold text-sm hover:bg-red-600 transition-colors">Start Party</button>
+</div>
+</div>
+<div class="flex flex-col p-4 pt-0 gap-1">
+<h3 class="text-slate-900 dark:text-white text-base font-bold leading-tight truncate">The Witcher</h3>
+<p class="text-slate-500 dark:text-text-secondary text-sm font-normal">Fantasy • Season 3</p>
+</div>
+</div>
+<!-- Movie Card 3 -->
+<div class="group relative flex flex-col gap-3 rounded-xl bg-white dark:bg-surface-dark shadow-sm hover:shadow-xl dark:shadow-black/40 min-w-[220px] max-w-[220px] transition-all duration-300 hover:-translate-y-1 overflow-hidden">
+<div class="relative w-full aspect-[2/3] overflow-hidden">
+<div class="w-full h-full bg-center bg-no-repeat bg-cover transition-transform duration-500 group-hover:scale-110" data-alt="Futuristic city skyline for Sci-Fi movie" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDDmKqecOk7oCaF0GYFVMNgH18vMt-s6A07P3yKscLxqx64OdaCvFoF2J6eM8Opxyy_GovX-E2mtYT_dPnagS_ePo1nakhl6EEzGsRW_ebZKmF8V87vtibhmc0YfK0aKxhm6tw9fbNxtZ1HvfDkT1oow-AsYBG_NfynmwPp1jhIfjrD69rN46C5oerG-PXp23LqPrC8F4jsJb6omTccBpifLaefJbXom_JkmBuZ_Mj32A7cP_RGN1WUUetYyfQjWsPlemS_qLDpT9s");'></div>
+<!-- Hover Overlay with CTA -->
+<div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-4 gap-3">
+<button class="w-full py-2 bg-primary text-white rounded font-bold text-sm hover:bg-red-600 transition-colors">Start Party</button>
+</div>
+<div class="absolute top-2 right-2 bg-black/70 backdrop-blur-sm px-2 py-0.5 rounded text-xs font-bold text-white flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] text-yellow-400">star</span> 8.8
+                                </div>
+</div>
+<div class="flex flex-col p-4 pt-0 gap-1">
+<h3 class="text-slate-900 dark:text-white text-base font-bold leading-tight truncate">Inception</h3>
+<p class="text-slate-500 dark:text-text-secondary text-sm font-normal">Sci-Fi Movie • 2h 28m</p>
+</div>
+</div>
+<!-- Movie Card 4 -->
+<div class="group relative flex flex-col gap-3 rounded-xl bg-white dark:bg-surface-dark shadow-sm hover:shadow-xl dark:shadow-black/40 min-w-[220px] max-w-[220px] transition-all duration-300 hover:-translate-y-1 overflow-hidden">
+<div class="relative w-full aspect-[2/3] overflow-hidden">
+<div class="w-full h-full bg-center bg-no-repeat bg-cover transition-transform duration-500 group-hover:scale-110" data-alt="Superhero action movie poster with red theme" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBXtjkGIz0EeyYfXcryqIYVZ4KGBFLqCRCbna_b7Vn81G5PrxZJ94sMaBZ5fccd1J6dkzgtZHa1sT-i5PQsaGcY2F29zXWjxxCI-42J8IqQ8md2IdWoxkkqQyXWT5-rzdhO1M3hRB2x6aJ_wF8Pc_NCmaPUSfTXaGVfRH38rTQNRwki-1o7AZxWvw4O3v6hNOW29zd74WRIcwgKsTFgR5IY7gC8na5PfHxvDsP0O_m6rZ3TtRbjG0tiWxGmzP_9Axv6zbWW3-3eJPQ");'></div>
+<!-- Hover Overlay with CTA -->
+<div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-4 gap-3">
+<button class="w-full py-2 bg-primary text-white rounded font-bold text-sm hover:bg-red-600 transition-colors">Start Party</button>
+</div>
+</div>
+<div class="flex flex-col p-4 pt-0 gap-1">
+<h3 class="text-slate-900 dark:text-white text-base font-bold leading-tight truncate">Spider-Man: No Way Home</h3>
+<p class="text-slate-500 dark:text-text-secondary text-sm font-normal">Action • 2021</p>
+</div>
+</div>
+<!-- Movie Card 5 -->
+<div class="group relative flex flex-col gap-3 rounded-xl bg-white dark:bg-surface-dark shadow-sm hover:shadow-xl dark:shadow-black/40 min-w-[220px] max-w-[220px] transition-all duration-300 hover:-translate-y-1 overflow-hidden">
+<div class="relative w-full aspect-[2/3] overflow-hidden">
+<div class="w-full h-full bg-center bg-no-repeat bg-cover transition-transform duration-500 group-hover:scale-110" data-alt="Desert landscape for Dune movie" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDZVFnNCHN8f72OUuhwmygiBiD7KA_oFjRYPfz1ow8aB4x6J0wXqTuEbpKewy5Hm-xH62-J06y2wmdlfeW3lYuUD1H3CG_f6qyy32dNvMqcnFrRilLIT-fp2KGLCEbyZiC3-XALgTEitDBxS4GlA5RGiw819BbsyTDflzvZbte4mpQfKcqqi3eQM6NonO3AU84CnQ8ilYbXahdMhlfCUwW7rlMiTWsDz0k_kpYeiThBYbBlmoudhRI0A7VujJ5jUfwwL3EqQX5bfk0");'></div>
+<!-- Hover Overlay with CTA -->
+<div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-4 gap-3">
+<button class="w-full py-2 bg-primary text-white rounded font-bold text-sm hover:bg-red-600 transition-colors">Start Party</button>
+</div>
+<div class="absolute top-2 right-2 bg-black/70 backdrop-blur-sm px-2 py-0.5 rounded text-xs font-bold text-white flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] text-yellow-400">star</span> 8.5
+                                </div>
+</div>
+<div class="flex flex-col p-4 pt-0 gap-1">
+<h3 class="text-slate-900 dark:text-white text-base font-bold leading-tight truncate">Dune</h3>
+<p class="text-slate-500 dark:text-text-secondary text-sm font-normal">Sci-Fi • Part One</p>
+</div>
+</div>
+<!-- Movie Card 6 -->
+<div class="group relative flex flex-col gap-3 rounded-xl bg-white dark:bg-surface-dark shadow-sm hover:shadow-xl dark:shadow-black/40 min-w-[220px] max-w-[220px] transition-all duration-300 hover:-translate-y-1 overflow-hidden">
+<div class="relative w-full aspect-[2/3] overflow-hidden">
+<div class="w-full h-full bg-center bg-no-repeat bg-cover transition-transform duration-500 group-hover:scale-110" data-alt="Abstract colorful poster for animated movie" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDtXji_xC5QCA-gJDM8lCMTQf_G1sINg_lm0FAbeGccd5svvBskgFm83xG0d4-vCDc8j0vv9r-TAWt4CQglVEfAZ4pFl1Ja7dNmeh6sMkjrlHiNlkwX-Yj1W4QGWCBG-WpBmJ-c80MTbQhJA8Ow--fNCVxtbRWR0_JZONbTGYznpONiuNbKx7NAbKcfeIlzE2LI0byPdOejrhPTxqdeB1egds9gS2ORq3wqY1cS0MUNFbPtAIrtMY7NI4MLnTnnZnC1-IqLSr09a1Q");'></div>
+<!-- Hover Overlay with CTA -->
+<div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-4 gap-3">
+<button class="w-full py-2 bg-primary text-white rounded font-bold text-sm hover:bg-red-600 transition-colors">Start Party</button>
+</div>
+</div>
+<div class="flex flex-col p-4 pt-0 gap-1">
+<h3 class="text-slate-900 dark:text-white text-base font-bold leading-tight truncate">Cyberpunk Edgerunners</h3>
+<p class="text-slate-500 dark:text-text-secondary text-sm font-normal">Anime • Series</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="w-full flex justify-center py-10 px-4 md:px-10 bg-slate-50 dark:bg-[#1f1616]">
+    <div class="layout-content-container flex flex-col max-w-[1200px] flex-1">
+        <h2 class="text-slate-900 dark:text-white text-2xl font-bold mb-6">Live Public Parties</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="bg-white dark:bg-surface-dark p-4 rounded-xl border border-slate-200 dark:border-border-dark flex items-center gap-4 cursor-pointer hover:border-primary transition-all group">
+                <div class="size-12 rounded-lg bg-cover" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCQVd-1IqLSr09a1Q");'></div>
+                <div class="flex-1">
+                    <h4 class="text-sm font-bold group-hover:text-primary">Sci-Fi Night</h4>
+                    <p class="text-xs text-slate-500">Watching Inception</p>
+                </div>
+                <span class="text-xs font-bold text-green-500">12 watching</span>
+            </div>
+            <div class="bg-white dark:bg-surface-dark p-4 rounded-xl border border-slate-200 dark:border-border-dark flex items-center gap-4 cursor-pointer hover:border-primary transition-all group">
+                <div class="size-12 rounded-lg bg-cover" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCQVd-1IqLSr09a1Q");'></div>
+                <div class="flex-1">
+                    <h4 class="text-sm font-bold group-hover:text-primary">Horror Fans</h4>
+                    <p class="text-xs text-slate-500">Watching The Conjuring</p>
+                </div>
+                <span class="text-xs font-bold text-green-500">45 watching</span>
+            </div>
+        </div>
+    </div>
+</section>
+ <!-- Social Proof / Testimonials -->
+<section class="w-full flex justify-center py-16 px-4 md:px-10 bg-gray-100 dark:bg-[#1a1313]">
+<div class="layout-content-container flex flex-col max-w-[1200px] flex-1">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+<div class="flex flex-col gap-6">
+<h2 class="text-slate-900 dark:text-white text-3xl font-black leading-tight">Join thousands of <br/>watch parties.</h2>
+<p class="text-slate-600 dark:text-text-secondary text-lg">Don't watch alone. Connect with friends and family from miles away.</p>
+<div class="flex gap-4 mt-2">
+<div class="flex flex-col gap-1">
+<span class="text-3xl font-bold text-primary">5M+</span>
+<span class="text-xs text-slate-500 dark:text-text-secondary uppercase tracking-wider">Users</span>
+</div>
+<div class="w-px bg-gray-300 dark:bg-border-dark h-full mx-2"></div>
+<div class="flex flex-col gap-1">
+<span class="text-3xl font-bold text-primary">120K+</span>
+<span class="text-xs text-slate-500 dark:text-text-secondary uppercase tracking-wider">Parties Daily</span>
+</div>
+</div>
+</div>
+<!-- Chat UI Mockup -->
+<div class="rounded-xl bg-white dark:bg-surface-dark border border-gray-200 dark:border-border-dark p-4 shadow-xl max-w-md w-full ml-auto">
+<div class="flex items-center justify-between border-b border-gray-100 dark:border-border-dark pb-3 mb-3">
+<span class="font-bold text-sm text-slate-900 dark:text-white">Party Chat</span>
+<span class="w-2 h-2 rounded-full bg-green-500"></span>
+</div>
+<div class="flex flex-col gap-3">
+<div class="flex gap-3">
+<img alt="Avatar" class="w-8 h-8 rounded-full object-cover" data-alt="User avatar 1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDI0uTIzpZg2BY4c4a064pLOVxjqNwnxUyiu4L5N8OPk2-citZ5rrf179UfKqVPMgN8X3afWgM6jy3A8Kt5T3xNcTMtF8qL1SyAoUngKGd-6f-tlUL4U6UYSf04Wl3tJtbm9zeRdCOAB-XAlCDBX7X2jnVm82OVP1BJNfOMM-qfMZcGDmgljHU6l4XVbK3hRmxyXgb7uuybZCIREyqDXxqQlxMJaA9l4S2wezEilF5giHshRBFwP3xGRLcvWOIRHMdFe76vKAKu4Ic"/>
+<div class="bg-gray-100 dark:bg-[#382929] p-2 rounded-r-lg rounded-bl-lg text-sm text-slate-700 dark:text-gray-200">
+                                    No way he just did that! 😱
+                                </div>
+</div>
+<div class="flex gap-3 flex-row-reverse">
+<img alt="Avatar" class="w-8 h-8 rounded-full object-cover" data-alt="User avatar 2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnsLfiXvNzRZf2NfjSC9Jw2i5hvxnsdgYsFIkAvEJ_R4Vmw1iMK3fCTn7R6VrhlHFLQUH8kyqss47Jq7MImkImOeJKT0Ze0XLjHMZJSPMIocyNAXNvWpg00W2D0a9XLlFXLrsNll3gTP35mIvBwqO9MxlV11TE1KZLhLKcx3GSWWLQloPNK-Q8OlgAEYQEtFgIifbSt13-FgC12AgGCA3frdb-o_CJHLRu-osSrjZ84GQlXqzjv3m2eF51FSNX_VXox1Chvlzw91c"/>
+<div class="bg-primary/20 p-2 rounded-l-lg rounded-br-lg text-sm text-slate-900 dark:text-white">
+                                    I knew it! The plot twist is insane.
+                                </div>
+</div>
+<div class="flex gap-3">
+<img alt="Avatar" class="w-8 h-8 rounded-full object-cover" data-alt="User avatar 3" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmcJ6_e9eB8RHV2j2XksjjX02Rl9KeWOGzR7Y2omrz7G7hdpTGHqRb1Ob5X_VferJIKB06TsfTNC0Cg0kLJP1ED9g2j9UHIUmmtBbcBemBtdU5QS9a8hkhxxqElx2aGVP38qsaGZBnDDbsmoYejoXh1cVnFi55RpAtaItknxBUzlvG7N0ke4KyFXyMCVqZWPhbXcV8OnBj2PtGCiLjkdYjdlJtMl7kORej2KSFpIC3fWKBdVg8QWfCr0J4RTt9epYSx6fzBXdrnDM"/>
+<div class="bg-gray-100 dark:bg-[#382929] p-2 rounded-r-lg rounded-bl-lg text-sm text-slate-700 dark:text-gray-200">
+                                    Wait, pause for a sec getting popcorn 🍿
+                                </div>
+</div>
+<div class="text-center text-xs text-gray-400 my-2">
+                                Sarah paused the video
+                            </div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer class="w-full border-t border-solid border-gray-200 dark:border-border-dark bg-background-light dark:bg-background-dark py-10 px-4 md:px-10">
+<div class="layout-content-container max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between gap-8">
+<div class="flex flex-col gap-4">
+<div class="flex items-center gap-2 text-slate-900 dark:text-white">
+<div class="size-6 text-primary">
+<svg fill="currentColor" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z"></path>
+</svg>
+</div>
+<h2 class="text-lg font-bold">GroupStream</h2>
+</div>
+<p class="text-slate-500 dark:text-text-secondary text-sm max-w-xs">
+                    The best way to watch movies online with friends. Synchronized video playback and group chat.
+                </p>
+</div>
+<div class="flex flex-wrap gap-12 md:gap-24">
+<div class="flex flex-col gap-3">
+<h3 class="text-slate-900 dark:text-white font-bold text-sm uppercase tracking-wider">Platform</h3>
+<a class="text-slate-500 dark:text-text-secondary text-sm hover:text-primary transition-colors" href="browse.html">Browse Movies</a>
+<a class="text-slate-500 dark:text-text-secondary text-sm hover:text-primary transition-colors" href="#">Extensions</a>
+<a class="text-slate-500 dark:text-text-secondary text-sm hover:text-primary transition-colors" href="#">Mobile App</a>
+</div>
+<div class="flex flex-col gap-3">
+<h3 class="text-slate-900 dark:text-white font-bold text-sm uppercase tracking-wider">Support</h3>
+<a class="text-slate-500 dark:text-text-secondary text-sm hover:text-primary transition-colors" href="#">Help Center</a>
+<a class="text-slate-500 dark:text-text-secondary text-sm hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="text-slate-500 dark:text-text-secondary text-sm hover:text-primary transition-colors" href="#">Privacy Policy</a>
+</div>
+<div class="flex flex-col gap-3">
+<h3 class="text-slate-900 dark:text-white font-bold text-sm uppercase tracking-wider">Social</h3>
+<div class="flex gap-4">
+<a class="text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">public</span>
+</a>
+<a class="text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">alternate_email</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="layout-content-container max-w-[1200px] mx-auto mt-10 pt-6 border-t border-gray-200 dark:border-border-dark text-center md:text-left">
+<p class="text-slate-400 text-xs">© 2023 GroupStream Inc. All rights reserved.</p>
+</div>
+</footer>
+</body></html>
+
+
+
+
+
